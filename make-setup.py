@@ -34,6 +34,31 @@ def get_gh_config(name):
     cfg['repository']['topics'] = tags
     return cfg
 
+def get_travis(name):
+    try:
+        with open(name + '/.travis.yml', 'r') as f:
+            cont = f.read()
+    except OSError:
+        return None
+
+    cfg = yaml.load(cont)
+    return cfg
+
+
+def get_compatible(name):
+
+    rst = []
+    t = get_travis(name)
+    if t is None:
+        return ["Programming Language :: Python :: 3"]
+
+    for v in t['python']:
+        if v.startswith('pypy'):
+            v = "Implementation :: PyPy"
+        rst.append("Programming Language :: Python :: {}".format(v))
+
+    return rst
+
 def get_req(name):
     try:
         with open(name + '/requirements.txt', 'r') as f:
@@ -57,6 +82,7 @@ ver = get_ver(name)
 description = cfg['repository']['description']
 long_description = open(name + '/README.md').read()
 req = get_req(name)
+prog = get_compatible(name)
 
 
 tmpl='''import setuptools
@@ -79,8 +105,7 @@ setuptools.setup(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries',
-        'Programming Language :: Python :: 3',
-    ],
+    ] + $prog,
 )
 '''
 
@@ -92,7 +117,8 @@ rst = s.substitute(
         description=repr(description), 
         long_description=repr(long_description), 
         topics = repr(cfg['repository']['topics']), 
-        req = repr(req)
+        req = repr(req),
+        prog=repr(prog)
 )
 with open('setup.py', 'w') as f:
     f.write(rst)
