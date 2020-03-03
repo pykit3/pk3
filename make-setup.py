@@ -47,6 +47,8 @@ def get_travis(name):
 
 def get_compatible(name):
 
+    # https://pypi.org/classifiers/
+
     rst = []
     t = get_travis(name)
     if t is None:
