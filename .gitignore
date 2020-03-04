@@ -2,3 +2,4 @@
 !/.gitignore
 !/build.sh
 !/make-setup.py
+!/toc
