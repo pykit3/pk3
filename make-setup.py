@@ -4,6 +4,7 @@
 import os
 import subprocess
 import sys
+import imp
 
 import setuptools
 import yaml
@@ -18,6 +19,16 @@ name = os.environ.get("MOD")
 
 
 def get_ver(name):
+    pkg = imp.load_source(name, name + '/__init__.py')
+    pkgver = pkg.__version__
+
+    sb = subprocess.Popen(["git", "tag", "v"+pkgver], cwd=name,
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = sb.communicate()
+    if sb.returncode != 0:
+        raise Exception("failure to add tag: " + pkgver, out, err)
+    return pkgver
+
     sb = subprocess.Popen(["git", "describe", "--tags"], cwd=name, stdout=subprocess.PIPE)
     out, _ = sb.communicate()
     out = out.decode(defenc, 'surrogateescape')
