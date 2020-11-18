@@ -23,5 +23,9 @@ Use this repo to create a new module repo:
   Documenting building stuffs are all in `docs/` dir.
 - Github meta data such as description and settings are managed with `.github/settings`. see https://github.com/pykit3/gh-config for detail.
 - Module publishing utils is in this module.
-- A module repo needs a `_name = "k3num"` and `__version__ = "0.1.2"` in its top level `__init__.py` so that building script generates the module name automatically
+- A module repo needs a `__name__ = "k3num"` and `__version__ = "0.1.2"` in its top level `__init__.py` so that building script generates the module name automatically
   A `version` must be in semantic version syntax.
+- Publish a release: `make release`. It invokes makefile in a embedded repo
+    `_building`  in every repo. `make release` builds a `setup.py` and commit it
+    and then push a tag of `'v' + __version__`.
+    A github Action will publish the package to pypi.
