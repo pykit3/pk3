@@ -109,7 +109,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     author='Zhang Yanpo',
     author_email='drdr.xp@gmail.com',
-    url='https://github.com/drmingdrmer/$name',
+    url='https://github.com/pykit3/$name',
     keywords=$topics,
     python_requires='>=3.0',
 
