@@ -1,5 +1,6 @@
 *
 !/.gitignore
-!/make-setup.py
-!/toc
 !/Makefile
+!/make-setup.py
+!/repos.yml
+!/toc
