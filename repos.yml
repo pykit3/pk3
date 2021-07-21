@@ -1,19 +1,23 @@
+#!/usr/bin/env xp-workspace.py
+other: []
 pykit3:
-  - pykit3/gh-config
-  - pykit3/k3color
-  - pykit3/k3common
-  - pykit3/k3confloader
-  - pykit3/k3down2
-  - pykit3/k3fs
-  - pykit3/k3git
-  - pykit3/k3handy
-  - pykit3/k3jobq
-  - pykit3/k3log
-  - pykit3/k3math
-  - pykit3/k3num
-  - pykit3/k3proc
-  - pykit3/k3str
-  - pykit3/k3thread
-  - pykit3/k3time
-  - pykit3/k3ut
-  - pykit3/tmpl
+- - . github.com/pykit3/gh-config
+- - . github.com/pykit3/k3color
+- - . github.com/pykit3/k3common
+- - . github.com/pykit3/k3confloader
+- - . github.com/pykit3/k3down2
+- - . github.com/pykit3/k3fs
+- - . github.com/pykit3/k3git
+- - . github.com/pykit3/k3handy
+- - . github.com/pykit3/k3heap
+  - kanade github.com/IloveKanade/k3heap
+- - . github.com/pykit3/k3jobq
+- - . github.com/pykit3/k3log
+- - . github.com/pykit3/k3math
+- - . github.com/pykit3/k3num
+- - . github.com/pykit3/k3proc
+- - . github.com/pykit3/k3str
+- - . github.com/pykit3/k3thread
+- - . github.com/pykit3/k3time
+- - . github.com/pykit3/k3ut
+- - . github.com/pykit3/tmpl
