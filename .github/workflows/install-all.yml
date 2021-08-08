@@ -24,7 +24,5 @@ jobs:
 
     - name: install all
       run: |
-        make readme
-
         pip install -r docs/repos.txt
 
