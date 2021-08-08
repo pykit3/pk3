@@ -11,6 +11,10 @@ pykit3:
 - - . github.com/pykit3/k3handy
 - - . github.com/pykit3/k3heap
   - kanade github.com/IloveKanade/k3heap
+  - drdr github.com/drmingdrmer/k3heap
+- - . github.com/pykit3/k3priorityqueue
+  - kanade github.com/IloveKanade/k3priorityqueue
+  - drdr github.com/drmingdrmer/k3priorityqueue
 - - . github.com/pykit3/k3jobq
 - - . github.com/pykit3/k3log
 - - . github.com/pykit3/k3math
