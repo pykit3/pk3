@@ -3,7 +3,6 @@ other: []
 pykit3:
 - - . github.com/pykit3/gh-config
 - - . github.com/pykit3/k3color
-- - . github.com/pykit3/k3common
 - - . github.com/pykit3/k3confloader
 - - . github.com/pykit3/k3down2
 - - . github.com/pykit3/k3fs

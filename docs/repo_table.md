@@ -1,7 +1,6 @@
 | Name | Desc |
 | :-- | :-- |
 | [k3color][] | create colored text on terminal |
-| [k3common][] | dependency manager |
 | [k3confloader][] | k3confloader loads conf for other pykit3 modules |
 | [k3dict][] | It provides with several dict operation functions. |
 | [k3down2][] | convert markdown segment into easy to transfer media sucha images. |

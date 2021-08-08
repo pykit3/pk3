@@ -1,5 +1,4 @@
 [k3color]: https://github.com/pykit3/k3color
-[k3common]: https://github.com/pykit3/k3common
 [k3confloader]: https://github.com/pykit3/k3confloader
 [k3dict]: https://github.com/pykit3/k3dict
 [k3down2]: https://github.com/pykit3/k3down2

@@ -3,7 +3,6 @@
 | Name | Desc |
 | :-- | :-- |
 | [k3color][] | create colored text on terminal |
-| [k3common][] | dependency manager |
 | [k3confloader][] | k3confloader loads conf for other pykit3 modules |
 | [k3dict][] | It provides with several dict operation functions. |
 | [k3down2][] | convert markdown segment into easy to transfer media sucha images. |
@@ -230,7 +229,6 @@ Write the `f**king` test!
 [tmpl]: https://github.com/pykit3/tmpl
 
 [k3color]: https://github.com/pykit3/k3color
-[k3common]: https://github.com/pykit3/k3common
 [k3confloader]: https://github.com/pykit3/k3confloader
 [k3dict]: https://github.com/pykit3/k3dict
 [k3down2]: https://github.com/pykit3/k3down2

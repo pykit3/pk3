@@ -1,5 +1,4 @@
 k3color
-k3common
 k3confloader
 k3dict
 k3down2
