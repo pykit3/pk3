@@ -1,9 +1,11 @@
 /*
 !/.gitignore
+!/.github
 !/Makefile
 !/build_list.py
 !/build_readme.py
 !/docs
 !/make-setup.py
 !/repos.yml
+!/requirements.txt
 !/toc
