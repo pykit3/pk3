@@ -1,34 +1,37 @@
 #!/usr/bin/env xp-workspace.py
 other:
-- - . github.com/pykit3/tmpl
 - - . github.com/pykit3/gh-config
+- - f github.com/pykit3/tmpl
 pykit3:
-- - f github.com/pykit3/k3dict
-- - f github.com/pykit3/k3fmt
-- - f github.com/pykit3/k3net
-- - f github.com/pykit3/k3pattern
-- - f github.com/pykit3/k3portlock
-- - f github.com/pykit3/k3rangeset
-- - f github.com/pykit3/k3shell
-- - f github.com/pykit3/k3txutil
+- - f github.com/pykit3/k3cgrouparch
 - - f github.com/pykit3/k3color
 - - f github.com/pykit3/k3confloader
+- - f github.com/pykit3/k3dict
 - - f github.com/pykit3/k3down2
+- - f github.com/pykit3/k3fmt
 - - f github.com/pykit3/k3fs
 - - f github.com/pykit3/k3git
 - - f github.com/pykit3/k3handy
 - - f github.com/pykit3/k3heap
+- - f github.com/pykit3/k3http
   - kanade github.com/IloveKanade/k3heap
   - drdr github.com/drmingdrmer/k3heap
 - - f github.com/pykit3/k3jobq
 - - f github.com/pykit3/k3log
 - - f github.com/pykit3/k3math
+- - f github.com/pykit3/k3net
 - - f github.com/pykit3/k3num
+- - f github.com/pykit3/k3pattern
+- - f github.com/pykit3/k3portlock
 - - f github.com/pykit3/k3priorityqueue
   - kanade github.com/IloveKanade/k3priorityqueue
   - drdr github.com/drmingdrmer/k3priorityqueue
 - - f github.com/pykit3/k3proc
+- - f github.com/pykit3/k3rangeset
+- - f github.com/pykit3/k3redisutil
+- - f github.com/pykit3/k3shell
 - - f github.com/pykit3/k3str
 - - f github.com/pykit3/k3thread
 - - f github.com/pykit3/k3time
+- - f github.com/pykit3/k3txutil
 - - f github.com/pykit3/k3ut
