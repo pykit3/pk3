@@ -3,11 +3,16 @@ other:
 - - . github.com/pykit3/gh-config
 - - f github.com/pykit3/tmpl
 pykit3:
+- - f github.com/pykit3/k3awssign
+- - f github.com/pykit3/k3cacheable
+- - f github.com/pykit3/k3cat
 - - f github.com/pykit3/k3cgrouparch
 - - f github.com/pykit3/k3color
 - - f github.com/pykit3/k3confloader
+- - f github.com/pykit3/k3daemonize
 - - f github.com/pykit3/k3dict
 - - f github.com/pykit3/k3down2
+- - f github.com/pykit3/k3etcd
 - - f github.com/pykit3/k3fmt
 - - f github.com/pykit3/k3fs
 - - f github.com/pykit3/k3git
@@ -16,9 +21,13 @@ pykit3:
 - - f github.com/pykit3/k3http
   - kanade github.com/IloveKanade/k3heap
   - drdr github.com/drmingdrmer/k3heap
+- - f github.com/pykit3/k3httpmultipart
 - - f github.com/pykit3/k3jobq
 - - f github.com/pykit3/k3log
+- - f github.com/pykit3/k3logcollector
 - - f github.com/pykit3/k3math
+- - f github.com/pykit3/k3mime
+- - f github.com/pykit3/k3modutil
 - - f github.com/pykit3/k3net
 - - f github.com/pykit3/k3num
 - - f github.com/pykit3/k3pattern
@@ -30,8 +39,13 @@ pykit3:
 - - f github.com/pykit3/k3rangeset
 - - f github.com/pykit3/k3redisutil
 - - f github.com/pykit3/k3shell
+- - f github.com/pykit3/k3stopwatch
 - - f github.com/pykit3/k3str
 - - f github.com/pykit3/k3thread
 - - f github.com/pykit3/k3time
 - - f github.com/pykit3/k3txutil
 - - f github.com/pykit3/k3ut
+- - f github.com/pykit3/k3utdocker
+- - f github.com/pykit3/k3utfjson
+- - f github.com/pykit3/k3wsjobd
+- - f github.com/pykit3/k3zkutil

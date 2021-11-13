@@ -9,9 +9,13 @@ import json
 
 
 def load_repos():
-    j = k3handy.cmdout('gh', 'repo', 'list', 'pykit3', '--json', 'name,url,description')
+    # defined in ~/.config/gh/config.yml
+
+    j = k3handy.cmdout('gh', 'reposNameUrlDesc', 'pykit3')
     j = ''.join(j)
     repos = json.loads(j)
+    repos = repos['data']['repositoryOwner']['repositories']['nodes']
+
     return repos
 
 
