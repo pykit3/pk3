@@ -9,3 +9,6 @@
 !/repos.yml
 !/requirements.txt
 !/toc
+!/repo-apply-tmpl.sh
+!/repo-cp-tmpl-python-package.sh
+!/run-script-in-repos.sh
