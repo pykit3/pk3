@@ -24,6 +24,6 @@ for d in `ls -dp k3*`; do
     echo "===($d)==="
     (
         cd ./github.com/pykit3/$d
-        "../../../$script" "$@"
+        bash -x "../../../$script" "$@"
     )
 done

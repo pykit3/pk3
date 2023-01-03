@@ -12,4 +12,5 @@
 !/repo-apply-tmpl.sh
 !/repo-cp-tmpl-python-package.sh
 !/repo-merge-pr.sh
+!/repo-pick-pr.sh
 !/run-script-in-repos.sh
