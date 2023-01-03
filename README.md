@@ -213,6 +213,20 @@ setup.py
 
     Examine the generated files and add them and make your first commit!
 
+## Update tmpl changes
+
+`applytmpl.sh` copies changes from repo `tmpl` to current dir.
+It should be run in a repo dir, e.g., `k3zkutil`:
+```
+./tmpl
+./k3zkutil
+```
+
+To apply tmlp chagnes to every repo:
+```
+run-script-in-repos.sh repo-apply-tmpl.sh
+```
+
 ## Document
 
 Write the `f**king` doc!
