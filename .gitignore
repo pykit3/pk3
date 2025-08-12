@@ -1,6 +1,7 @@
 /*
-!/.gitignore
+!/CLAUDE.md
 !/.github
+!/.gitignore
 !/Makefile
 !/build_list.py
 !/build_readme.py
