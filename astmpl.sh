@@ -1,9 +1,10 @@
 #!/bin/sh
 
-# Source this script in a _building directory to use the tmpl repo's git directory.
-# Example: `source path/to/astmpl.sh` in `k3git/_building`
+# Source this script in repo directory to use the tmpl repo's git directory.
+# Example: `source path/to/astmpl.sh` in `k3git/`
 #
-# Enables direct pushing changes from _building dir to the tmpl repo.
+# Enables direct pushing changes from repo dir to the tmpl repo.
 
 
-GIT_DIR=../tmpl/.git GIT_WORK_TREE=. bash
+# ~/xp/vcs/github.com/pykit3/pk3/github.com/pykit3/k3git/
+GIT_DIR=../../../tmpl/.git GIT_WORK_TREE=. bash
