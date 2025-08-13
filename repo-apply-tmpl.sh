@@ -1,5 +1,19 @@
 #!/bin/sh
 
+# repo-apply-tmpl.sh - Apply template changes to repository
+#
+# USAGE: `./repo-apply-tmpl.sh` in the repo dir, such as `k3git`
+#
+# Fetches latest changes, applies template (../../../applytmpl.sh), 
+# commits changes as 'deps: apply tmpl', and pushes to remote.
+#
+# Requirements:
+#   - Git repository with push access
+#   - Executable ../../../applytmpl.sh
+#   - Clean working directory
+#
+# Exits 0 on success, 1 on failure.
+
 set -o errexit
 git fetch
 git merge --ff-only

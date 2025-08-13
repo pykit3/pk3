@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Apply changes from the tmpl repo to the current repo.
+# Run it in the _building dir in a repo, such as in `k3git`.
 
 cp ../tmpl/_building/Makefile                  ./_building/
 cp ../tmpl/_building/README.md                 ./_building/
