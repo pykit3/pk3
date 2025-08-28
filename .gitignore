@@ -10,9 +10,5 @@
 !/repos.yml
 !/requirements.txt
 !/toc
-!/repo-apply-tmpl.sh
-!/repo-convert-remote.sh
-!/repo-cp-tmpl-python-package.sh
-!/repo-merge-pr.sh
-!/repo-pick-pr.sh
+!/repo-*.sh
 !/run-script-in-repos.sh
