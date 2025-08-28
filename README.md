@@ -1,198 +1,107 @@
-**pykit3** is a collection of python3 modules that are loved by [s2][] developers.
+# pykit3
 
-| Name | Desc |
+Collection of Python 3 utility modules.
+
+| Module | Description |
 | :-- | :-- |
-| [k3color][] | create colored text on terminal |
-| [k3confloader][] | k3confloader loads conf for other pykit3 modules |
-| [k3dict][] | It provides with several dict operation functions. |
-| [k3down2][] | convert markdown segment into easy to transfer media sucha images. |
-| [k3fmt][] | It provides with several string operation functions. |
-| [k3fs][] | File-system Utilities |
-| [k3git][] | wrapper of git command-line |
-| [k3handy][] | handy alias of mostly used functions |
-| [k3heap][] | k3heap is a binary min heap implemented with reference |
-| [k3jobq][] | k3jobq processes a series of inputs with functions concurrently |
-| [k3log][] | k3log is a collection of log utilities. |
-| [k3math][] | k3math is a toy math impl |
-| [k3net][] | Utility functions for network related operation. |
-| [k3num][] | Convert number to human readable format in a string. |
-| [k3pattern][] | Find common prefix of several `string`s, tuples of string, or other nested structure, recursively by default. |
-| [k3portlock][] | k3protlock is a cross-process lock that is implemented with `tcp` port binding. |
-| [k3priorityqueue][] | priorityQueue is a queue with priority support |
-| [k3proc][] | easy to use `Popen` |
-| [k3rangeset][] | segmented range which is represented in a list of sorted interleaving range. |
-| [k3shell][] | A python module to manage commands. |
-| [k3str][] | k3str is a collection of string utilities. |
-| [k3thread][] | utility to create thread. |
-| [k3time][] | Time convertion utils |
-| [k3txutil][] | A collection of helper functions to implement transactional operations. |
-| [k3ut][] | unittest util |
+| [k3color][] | Terminal text coloring |
+| [k3confloader][] | Configuration loader |
+| [k3dict][] | Dictionary operations |
+| [k3down2][] | Markdown to media converter |
+| [k3fmt][] | String formatting utilities |
+| [k3fs][] | File system utilities |
+| [k3git][] | Git command wrapper |
+| [k3handy][] | Common function aliases |
+| [k3heap][] | Binary min heap |
+| [k3jobq][] | Concurrent job processor |
+| [k3log][] | Logging utilities |
+| [k3math][] | Math implementations |
+| [k3net][] | Network utilities |
+| [k3num][] | Human-readable numbers |
+| [k3pattern][] | Pattern matching |
+| [k3portlock][] | TCP port-based locks |
+| [k3priorityqueue][] | Priority queue |
+| [k3proc][] | Process utilities |
+| [k3rangeset][] | Range operations |
+| [k3shell][] | Shell command management |
+| [k3str][] | String utilities |
+| [k3thread][] | Thread utilities |
+| [k3time][] | Time conversion |
+| [k3txutil][] | Transaction helpers |
+| [k3ut][] | Unit test utilities |
 
-
-`pk3` is the super repo for pykit3 sub module repos
-This is just a container and does nothing.
-
-# Usage
-
-```
-pip install xxx
-```
+This repository manages the pykit3 module collection.
 
 
 # Development
 
-## Engineering practices
+## Engineering Principles
 
-- Start with the correctness requirements, ignore the performance impact until
-  the end. You'll usually write something faster by focusing on keeping things
-  minimal anyway.
+- **Clarity first**: Write code for humans, prioritize readability
+- **Correctness over performance**: Focus on getting it right first  
+- **Simplicity**: Throw away what can't be done in a day, rewrite simpler tomorrow
+- **No smart code**: Write straightforward, maintainable code
+- **Comment WHY, not HOW**: Let code explain itself
 
-- Throw away what can't be done in a day of coding. when you rewrite it
-  tomorrow, it will be simpler.
+## Workflow
 
-- Write code for human.
-
-    - Clarity comes first.
-    - Then the correctness.
-    - Then the performance(It is python, right?).
-
-    You are a smart guy. But your colleagues may not
-    be smart as you are.
-
-    **Do not write smart codes**.
-
-- Only write comment to explain **WHY**.
-  Improve the code to explain **HOW** and **WHAT**.
-
-## Developing workflow
-
-Follow the github flow:
-
-- Fork a repo
-- Hacking on it
-- Fire a pull request and then merge it to upstream.
-
-    - Rebase to upstream master before open a PR to reduce conflict.
-
-- Open an issue to describe what you gonna do before hacking on it:
-    Let everybody else know what you are doing.
+1. Fork repository
+2. Create feature branch  
+3. Implement changes
+4. Open pull request with rebase to main
 
 
 
 
-## Make changes to a module
+## Module Development
 
-- `github-action` is used for CI, such as  https://github.com/pykit3/k3proc/actions .
-    The CI action is defined in `.github/workflows/python-package.yml`.
-    Most of the time you do not need to modify this file unless **you know what
-    you are doing**.
+### Setup
+- CI: GitHub Actions (`.github/workflows/python-package.yml`)
+- Testing: `pytest` framework
+- Documentation: Sphinx with [Google docstring style](https://www.sphinx-doc.org/en/1.5/ext/example_google.html)
+- Build docs: `make doc`
 
-- Testing is based on `pytest`: `pip install pytest` and `pytest`
+### Module Structure
+- `__init__.py` must define `__name__` and `__version__` ([semantic versioning](https://semver.org/))
+- GitHub metadata managed via `.github/settings.yml`
 
-- Document is generated by `sphinx`.
-  Python docstring follows [google docstring style](https://www.sphinx-doc.org/en/1.5/ext/example_google.html).
-  Documenting building stuffs are all in `docs/` dir.
-
-  To build and test the doc: `make doc`.
-
-- Github meta data such as description and project labels are managed with
-  `.github/settings.yml`. see https://github.com/pykit3/gh-config for detail.
-
-- A module repo needs a `__name__ = "k3proc"` and `__version__ = "0.1.2"` in its
-  top level `__init__.py` so that building script generates the module name
-  automatically. A `__version__` must be in [semantic-version][] syntax.
-
-- Publish a module to `pip`:
-
-    - Update the version in `__init__.py`, e.g., to publish next version
-        `0.2.14` of `k3proc`, updata the `__version__` to `"0.2.14"`:
-
-        ```
-        # cat k3proc/__init__.py
-        ...
-        __version__ = "0.2.13"
-        __name__ = 'k3proc'
-        ...
-        ```
-    - Commit the version changes and `make build_setup_py`.
-        This step creates a new tag of the current version.
-
-    - Pushing the created tag triggers an github action that
-        build a pip module and upload to `pypi.org`.
-
-    Then one can install the module(e.g. `k3proc`)
-    with `pip install k3proc` or with version specified:
-    `pip install k3proc==0.2.14`.
+### Publishing
+1. Update `__version__` in `__init__.py`
+2. Commit and run `make build_setup_py`
+3. Push tag to trigger PyPI upload via GitHub Actions
 
 
-## Module dir layout
-
-Take `k3proc` as example:
+## Directory Structure
 
 ```
-# github.com/pykit3/k3proc/
-
-.github/workflows/python-package.yml
-.github/workflows/python-publish.yml
-.github/dependabot.yml
-.github/settings.yml
-_building/
-docs/
-test/
-__init__.py
-LICENSE
-Makefile
-proc.py*
-README.md
-requirements.txt
-setup.py
+k3module/
+├── .github/workflows/    # CI/CD configurations
+├── _building/           # Build utilities  
+├── docs/               # Sphinx documentation
+├── test/               # Unit tests
+├── __init__.py        # Module metadata and exports
+├── main_module.py     # Primary implementation
+├── LICENSE
+├── Makefile          # Build commands
+├── README.md         # Auto-generated, do not edit
+├── requirements.txt  # Dependencies
+└── setup.py         # Auto-generated for releases
 ```
 
-- `.github/workflows/python-package.yml`: github-action for CI.
-
-- `.github/workflows/python-publish.yml`: github-action for publishing a pip package.
-
-- `.github/dependabot.yml`: dependency check config.
-
-- `.github/settings.yml`: defines project desc, labels etc. Just modify it and push.
-
-- `_building/`: building utils for build pip package and docs etc.
-
-- `docs/source/conf.py`: universal doc generating config. DO NOT MODIFY.
-
-- `docs/source/index.rst`: defines what module/class/function to generate doc.
-    UPDATE this file for every modification to the codes.
-
-- `test/`: unit test files.
-
-- `test/data`: data file for test, if required.
-
-- `__init__.py`: defines meta info about a module. such as name, version and
-    module doc. Export APIs to end user.
-
-- `LICENSE`
-
-- `proc.py`: your actual works are here. choose whatever a name as you wish.
-    It should be directly imported by `__init__.py` to expose APIs to end user.
-
-- `README.md`: readme in pykit3 is generated. DO NOT MODIFY IT. `make readme`
-    re-generates README.md by extracting docs and examples from codes.
-    See: `_building/build_readme.py`.
-
-- `requirements.txt`: the dependency pip. Some packages that are depended by
-    all modules are defined in `_building/requirements.txt`.
-
-- `setup.py`: script to publish the module. You do not need to modify this file.
-    It is auto generated with `make build_setup_py`.
+Key files:
+- `docs/source/index.rst`: Update for new APIs
+- `README.md`: Generated via `make readme`
+- `setup.py`: Generated via `make build_setup_py`
 
 
-## Create a new module
+## Creating New Modules
 
-- Fork from [tmpl][], which is a template module.
-    Choose a good name starts with `k3`, e.g. `k3whatever`.
+1. Fork from [tmpl][] (template repository)
+2. Choose name starting with `k3`
+3. Clone: `git clone git@github.com:pykit3/k3newmodule.git`
+4. Generate skeleton: `python ./_building/populate.py`
 
-- Clone the repo to your laptop:
-  `git clone git@github.com:pykit3/k3whatever.git`.
+## Template Updates
 
 - Populate it: `python ./_building/populate.py`.
     This step generates a skeleton of a module:
@@ -227,15 +136,10 @@ To apply tmlp chagnes to every repo:
 run-script-in-repos.sh repo-apply-tmpl.sh
 ```
 
-## Document
+## Documentation & Testing
 
-Write the `f**king` doc!
-
-- Document the module, classes and methods.
-
-## Testing
-
-Write the `f**king` test!
+- Document all modules, classes, and methods
+- Write comprehensive tests
 
 
 [s2]: https://github.com/bsc-s2
