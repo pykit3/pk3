@@ -114,7 +114,7 @@ Follow the github flow:
         __name__ = 'k3proc'
         ...
         ```
-    - Commit the version changes and `make release`.
+    - Commit the version changes and `make build_setup_py`.
         This step creates a new tag of the current version.
 
     - Pushing the created tag triggers an github action that
@@ -183,7 +183,7 @@ setup.py
     all modules are defined in `_building/requirements.txt`.
 
 - `setup.py`: script to publish the module. You do not need to modify this file.
-    It is auto generated with `make release`.
+    It is auto generated with `make build_setup_py`.
 
 
 ## Create a new module
