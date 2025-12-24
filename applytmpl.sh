@@ -16,6 +16,7 @@ cp $template_repo_path/_building/build_setup.py            ./_building/
 cp $template_repo_path/_building/building-requirements.txt ./_building/
 cp $template_repo_path/_building/common.mk                 ./_building/
 cp $template_repo_path/_building/install.sh                ./_building/
+cp $template_repo_path/_building/publish.sh                ./_building/
 cp $template_repo_path/_building/requirements.txt          ./_building/
 
 cp $template_repo_path/docs/source/conf.py                 ./docs/source/
