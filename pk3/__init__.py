@@ -6,5 +6,6 @@ __version__ = version("pk3")
 
 from .version import get_version
 from .tag import create_tag
+from .publish import publish
 
-__all__ = ["get_version", "create_tag", "__version__"]
+__all__ = ["get_version", "create_tag", "publish", "__version__"]
