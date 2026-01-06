@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pk3"
-version = "0.1.1"
+version = "0.1.2"
 description = "Build utilities for pykit3 packages"
 readme = "pk3/README.md"
 license = {text = "MIT"}
