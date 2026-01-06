@@ -12,3 +12,13 @@
 !/toc
 !/repo-*.sh
 !/run-script-in-repos.sh
+!/publish.sh
+!/pyproject.toml
+!/pk3
+!/tests
+
+# Python artifacts
+__pycache__/
+*.egg-info/
+dist/
+build/
