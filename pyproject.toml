@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pk3"
-version = "0.1.3"
+version = "0.1.4"
 description = "Build utilities for pykit3 packages"
 readme = "pk3/README.md"
 license = {text = "MIT"}
@@ -13,6 +13,10 @@ authors = [
     { name = "Zhang Yanpo", email = "drdr.xp@gmail.com" }
 ]
 keywords = ["build", "pykit3", "version"]
+dependencies = [
+    "jinja2>=3.0",
+    "pyyaml>=6.0",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
