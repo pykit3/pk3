@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "pk3"
 version = "0.1.1"
 description = "Build utilities for pykit3 packages"
-readme = "README.md"
+readme = "pk3/README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
 authors = [
@@ -26,6 +26,9 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/pykit3/pk3"
+
+[project.scripts]
+pk3 = "pk3.__main__:main"
 
 [project.optional-dependencies]
 dev = [
