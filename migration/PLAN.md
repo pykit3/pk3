@@ -1,0 +1,58 @@
+# Migration Plan
+
+Repos to migrate from `setup.py` to `pyproject.toml`.
+
+Location: `~/xp/vcs/github.com/pykit3/pk3/github.com/pykit3/`
+
+## Status
+
+| Package         | Status  |
+|---------        |-------- |
+| k3awssign       | ✅      |
+| k3cacheable     | ✅      |
+| k3cat           | ✅      |
+| k3cgrouparch    | ✅      |
+| k3color         | ✅      |
+| k3confloader    | ✅      |
+| k3daemonize     | ✅      |
+| k3dict          | ✅      |
+| k3down2         | ✅      |
+| k3etcd          | ✅      |
+| k3fmt           | ✅      |
+| k3fs            | ✅      |
+| k3handy         | ✅      |
+| k3heap          | ✅      |
+| k3http          | ✅      |
+| k3httpmultipart | ✅      |
+| k3jobq          | ✅      |
+| k3log           | ✅      |
+| k3logcollector  | ✅      |
+| k3math          | ✅      |
+| k3mime          | ✅      |
+| k3modutil       | ✅      |
+| k3net           | ✅      |
+| k3num           | ✅      |
+| k3pattern       | ✅      |
+| k3portlock      | ✅      |
+| k3priorityqueue | ⬜      |
+| k3proc          | ⬜      |
+| k3rangeset      | ⬜      |
+| k3redisutil     | ⬜      |
+| k3shell         | ⬜      |
+| k3stopwatch     | ⬜      |
+| k3str           | ⬜      |
+| k3thread        | ⬜      |
+| k3time          | ⬜      |
+| k3txutil        | ⬜      |
+| k3ut            | ⬜      |
+| k3utdocker      | ⬜      |
+| k3utfjson       | ⬜      |
+| k3wsjobd        | ⬜      |
+| k3zkutil        | ⬜      |
+
+**Legend:** ⬜ pending | 🔄 in progress | ✅ done | ❌ skipped
+
+## Notes
+
+- k3git already migrated (reference implementation)
+- Run `MIGRATION.md` steps for each package
