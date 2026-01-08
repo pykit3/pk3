@@ -34,23 +34,23 @@ Location: `~/xp/vcs/github.com/pykit3/pk3/github.com/pykit3/`
 | k3num           | ✅      |
 | k3pattern       | ✅      |
 | k3portlock      | ✅      |
-| k3priorityqueue | ⬜      |
-| k3proc          | ⬜      |
-| k3rangeset      | ⬜      |
-| k3redisutil     | ⬜      |
-| k3shell         | ⬜      |
-| k3stopwatch     | ⬜      |
-| k3str           | ⬜      |
-| k3thread        | ⬜      |
-| k3time          | ⬜      |
-| k3txutil        | ⬜      |
-| k3ut            | ⬜      |
-| k3utdocker      | ⬜      |
-| k3utfjson       | ⬜      |
-| k3wsjobd        | ⬜      |
-| k3zkutil        | ⬜      |
+| k3priorityqueue | ✅      |
+| k3proc          | ✅      |
+| k3rangeset      | ✅      |
+| k3redisutil     | ✅      |
+| k3shell         | ✅      |
+| k3stopwatch     | ✅      |
+| k3str           | ✅      |
+| k3thread        | ✅      |
+| k3time          | ✅      |
+| k3txutil        | ✅      |
+| k3ut            | ✅      |
+| k3utdocker      | ✅      |
+| k3utfjson       | ✅      |
+| k3wsjobd        | ✅      |
+| k3zkutil        | ✅      |
 
-**Legend:** ⬜ pending | 🔄 in progress | ✅ done | ❌ skipped
+**Legend:** ⬜ pending | 🔄 in progress | ✅ done | ⚠️ done with issues | ❌ skipped
 
 ## Notes
 
