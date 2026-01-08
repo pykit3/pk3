@@ -132,6 +132,32 @@ From the README.md, this project follows these principles:
 - **No smart code**: Write straightforward, maintainable code
 - **Comment WHY, not HOW**: Let code explain itself
 
+## Code Standards
+
+### Type Annotations
+
+All code must use strong typing. Type annotations are required for:
+- All function parameters and return values
+- Class attributes
+- Module-level variables where the type isn't obvious
+
+```python
+# Good
+def command(
+    cmd: str | Sequence[str],
+    *arguments: str,
+    timeout: float | None = None,
+) -> tuple[int, str, str]:
+    ...
+
+# Bad
+def command(cmd, *arguments, timeout=None):
+    ...
+```
+
+Use modern Python 3.10+ union syntax (`X | Y`) instead of `Union[X, Y]`.
+Import `from __future__ import annotations` for forward references.
+
 ## Dependencies and Requirements
 
 - **Python**: Python 3.x
