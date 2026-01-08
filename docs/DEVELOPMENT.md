@@ -385,6 +385,32 @@ make readme    # Generate README.md
 make cov       # Run tests with coverage
 ```
 
+### CI Branch Workflow
+
+Use the `ci` branch to validate changes before merging to master:
+
+```bash
+# 1. Develop and commit locally
+git add .
+git commit -m "feat: your feature description"
+
+# 2. Push to ci branch to trigger CI
+git push origin master:ci -f
+
+# 3. Monitor CI status
+gh run list --branch ci --limit 5
+gh run watch <run-id> --exit-status
+
+# 4. Once CI passes, push to master
+git push origin master
+```
+
+This workflow ensures:
+- All tests pass on multiple Python versions (3.9-3.12)
+- Linting and type checking pass
+- Documentation builds successfully
+- Changes are validated before reaching master
+
 ### Testing
 
 Tests go in the `test/` directory:
