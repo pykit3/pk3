@@ -7,6 +7,7 @@ Automate the full release workflow: CI validation, version bump, tag, publish to
 1. **Push to CI branch and validate**
    - Push current branch to `ci` branch: `git push origin HEAD:ci -f`
    - Get the latest CI run ID for the `ci` branch
+   - Open the CI run page in browser: `gh run view {run_id} --web`
    - Watch the CI run until completion
    - If any CI job fails:
      - Analyze the failure logs
@@ -32,6 +33,7 @@ Automate the full release workflow: CI validation, version bump, tag, publish to
 
 5. **Watch publish workflow**
    - Find the "Upload Python Package" workflow run triggered by the tag
+   - Open the workflow run page in browser: `gh run view {run_id} --web`
    - Watch until completion
    - If publish fails, report the failure
 
