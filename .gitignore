@@ -1,24 +1,7 @@
-/*
-!/CLAUDE.md
-!/.github
-!/.gitignore
-!/Makefile
-!/build_list.py
-!/build_readme.py
-!/docs
-!/make-setup.py
-!/repos.yml
-!/requirements.txt
-!/toc
-!/repo-*.sh
-!/run-script-in-repos.sh
-!/publish.sh
-!/pyproject.toml
-!/pk3
-!/tests
-
 # Python artifacts
 __pycache__/
 *.egg-info/
 dist/
 build/
+
+/packages/
