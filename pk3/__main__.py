@@ -1,4 +1,25 @@
-"""CLI entry point for pk3."""
+"""
+CLI entry point for pk3.
+
+pk3 provides build utilities for pykit3 packages via these subcommands:
+
+    pk3 version [--path PATH]
+        Print the version from pyproject.toml. Useful for scripts that need
+        to extract version without parsing TOML manually.
+
+    pk3 tag [--path PATH] [--prefix PREFIX]
+        Create a git tag from the version in pyproject.toml. For example,
+        version "0.1.0" becomes tag "v0.1.0" (prefix defaults to "v").
+        After running, push with: git push --tags
+
+    pk3 publish [--test]
+        Build the package and upload to PyPI. Requires TWINE_PASSWORD env var
+        set to a PyPI API token. Use --test to upload to TestPyPI first.
+
+    pk3 readme [--dir DIR] [--template FILE] [--output FILE]
+        Generate README.md from package docstrings and examples. Extracts
+        doctest examples from __init__.py and renders using Jinja2 template.
+"""
 
 import argparse
 

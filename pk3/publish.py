@@ -1,4 +1,20 @@
-"""Publish package to PyPI."""
+"""
+Publish package to PyPI.
+
+CLI usage:
+    TWINE_PASSWORD=pypi-xxx pk3 publish [--test]
+
+Builds the package using `python -m build` and uploads to PyPI using twine.
+Cleans dist/, build/, and *.egg-info before building.
+
+Prerequisites:
+    - TWINE_PASSWORD env var set to PyPI API token (get from pypi.org/manage/account/token/)
+    - Optional dependencies: pip install pk3[publish]
+
+Use --test to upload to TestPyPI first for verification:
+    TWINE_PASSWORD=pypi-xxx pk3 publish --test
+    pip install -i https://test.pypi.org/simple/ yourpackage
+"""
 
 import os
 import shutil

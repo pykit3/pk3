@@ -1,4 +1,21 @@
-"""Git tag creation for releases."""
+"""
+Git tag creation for releases.
+
+CLI usage:
+    pk3 tag [--path PATH] [--prefix PREFIX]
+
+Creates a git tag based on the version in pyproject.toml. For example,
+if pyproject.toml contains version = "0.2.1", this creates tag "v0.2.1".
+
+The tag is created locally - push it with:
+    git push --tags
+
+Typical release workflow:
+    1. Update version in pyproject.toml
+    2. Commit: git commit -am "Bump to 0.2.1"
+    3. Create tag: pk3 tag
+    4. Push: git push && git push --tags
+"""
 
 import subprocess
 import sys

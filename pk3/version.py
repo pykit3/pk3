@@ -1,4 +1,17 @@
-"""Version extraction from pyproject.toml."""
+"""
+Version extraction from pyproject.toml.
+
+CLI usage:
+    pk3 version [--path PATH]
+
+Reads the [project].version field from pyproject.toml and prints it to stdout.
+This allows shell scripts to obtain the package version without TOML parsing:
+
+    VER=$(pk3 version)
+    echo "Building version $VER"
+
+Uses tomllib (Python 3.11+) when available, falls back to regex parsing.
+"""
 
 import re
 from pathlib import Path

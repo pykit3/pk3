@@ -1,4 +1,23 @@
-"""README generation from package docstrings and templates."""
+"""
+README generation from package docstrings and templates.
+
+CLI usage:
+    pk3 readme [--dir DIR] [--template FILE] [--output FILE]
+
+Generates README.md by extracting documentation from the package:
+    - Package name and description from pyproject.toml
+    - Module docstring from __init__.py
+    - Doctest examples (>>> blocks) from __init__.py
+    - Additional examples from synopsis.txt or synopsis.py if present
+
+The default template includes badges, installation instructions, and author info.
+Use --template to provide a custom Jinja2 template with variables:
+    {{ name }}, {{ description }}, {{ package_doc }}, {{ synopsis }}
+
+Example:
+    cd mypackage && pk3 readme
+    pk3 readme --dir ./k3color --output docs/README.md
+"""
 
 import doctest
 import importlib.util
