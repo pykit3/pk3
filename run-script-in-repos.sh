@@ -20,10 +20,11 @@ fi
 
 set -o errexit
 
-for d in `ls -dp k3*`; do
-    echo "===($d)==="
+for d in packages/k3*/; do
+    name=$(basename "$d")
+    echo "===($name)==="
     (
-        cd ./github.com/pykit3/$d
-        bash -x "../../../$script" "$@"
+        cd "$d"
+        bash -x "../../$script" "$@"
     )
 done

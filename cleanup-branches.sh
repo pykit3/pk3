@@ -6,7 +6,7 @@
 
 set -e
 
-REPOS_DIR="github.com/pykit3"
+REPOS_DIR="packages"
 DRY_RUN="${1:-}"
 
 cd "$(dirname "$0")"

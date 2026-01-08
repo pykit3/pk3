@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is `pk3`, a workspace repository for the pykit3 collection - a set of Python3 utility modules. The repository structure uses a sparse checkout organization:
 
 - **Root directory (`pk3`)**: Contains management scripts and coordination tools
-- **Module directories**: Each `k3*` module is stored under `github.com/pykit3/k3*` (some as independent git repos, others as working copies)
+- **Module directories**: Each `k3*` module is stored under `packages/k3*` (as independent git repos)
 - **Template system**: Uses `tmpl` as a template for creating new modules
 
 ### Key Architecture Concepts
@@ -25,31 +25,31 @@ This is `pk3`, a workspace repository for the pykit3 collection - a set of Pytho
 make readme
 
 # Build README for a specific module
-cd github.com/pykit3/k3color && make readme
+cd packages/k3color && make readme
 
 # Build documentation for a module
-cd github.com/pykit3/k3color && make doc
+cd packages/k3color && make doc
 ```
 
 ### Testing
 ```bash
 # Run tests for a specific module
-cd github.com/pykit3/k3color && make test
+cd packages/k3color && make test
 
 # Run tests with specific environment
-cd github.com/pykit3/k3color && sudo env "PATH=$PATH" UT_DEBUG=0 PYTHONPATH="$(cd ..; pwd)" python -m unittest discover -c --failfast -s .
+cd packages/k3color && sudo env "PATH=$PATH" UT_DEBUG=0 PYTHONPATH="$(cd ..; pwd)" python -m unittest discover -c --failfast -s .
 
 # Test a single file
-cd github.com/pykit3/k3color && python -m unittest test.test_color -v
+cd packages/k3color && python -m unittest test.test_color -v
 ```
 
 ### Release Management
 ```bash
 # Prepare a module for release (generates setup.py)
-cd github.com/pykit3/k3color && make release
+cd packages/k3color && make release
 
 # Install a module locally
-cd github.com/pykit3/k3color && make install
+cd packages/k3color && make install
 ```
 
 ### Cross-Repository Operations
@@ -115,7 +115,7 @@ k3modulename/
 ### Key Scripts
 - `build_list.py`: Generates repository lists and markdown tables using GitHub CLI
 - `build_readme.py`: Auto-generates the main README.md from module data
-- `run-script-in-repos.sh`: Executes scripts across all k3* subdirectories
+- `run-script-in-repos.sh`: Executes scripts across all packages/k3* repos
 - `applytmpl.sh`: Copies template changes to current repository
 
 ### GitHub Integration
