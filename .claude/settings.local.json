@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(pip show:*)",
+      "Bash(pytest:*)",
+      "Bash(pk3:*)",
+      "Bash(uvx ruff:*)",
+      "Bash(git checkout:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git merge:*)",
+      "Bash(gh pr create:*)",
+      "Bash(chmod:*)",
+      "Bash(open https://pypi.org/project/*)"
+    ]
+  }
+}
