@@ -1,3 +1,3 @@
 readme:
-	python build_list.py
-	python build_readme.py
+	python scripts/workspace-build-repo-list.py
+	python scripts/workspace-build-readme.py

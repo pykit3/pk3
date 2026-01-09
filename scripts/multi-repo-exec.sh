@@ -11,7 +11,7 @@ END
 script=$1
 shift
 
-if [ -f "./$script" ]; then
+if [ -f "./scripts/$script" ]; then
     :
 else
     usage
@@ -25,6 +25,6 @@ for d in packages/k3*/; do
     echo "===($name)==="
     (
         cd "$d"
-        bash -x "../../$script" "$@"
+        bash -x "../../scripts/$script" "$@"
     )
 done

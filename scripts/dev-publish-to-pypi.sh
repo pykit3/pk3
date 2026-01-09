@@ -5,7 +5,7 @@ set -e
 # Usage: TWINE_PASSWORD=pypi-xxx ./publish.sh [test]
 #
 # Sub-repos can reuse this script by symlinking:
-#   ln -s ../../pk3/publish.sh ./publish.sh
+#   ln -s ../../pk3/scripts/dev-publish-to-pypi.sh ./publish.sh
 
 if [ -z "$TWINE_PASSWORD" ]; then
     echo "Error: TWINE_PASSWORD not set"

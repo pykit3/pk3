@@ -54,14 +54,17 @@ cd packages/k3color && make install
 
 ### Cross-Repository Operations
 ```bash
-# Apply template changes to all repos
-./run-script-in-repos.sh repo-apply-tmpl.sh
-
 # Run any script across all k3* repositories
-./run-script-in-repos.sh <script_name> <args...>
+./scripts/multi-repo-exec.sh <script_name> <args...>
 
-# Copy template files from tmpl to current directory
-./applytmpl.sh
+# Clone all pykit3 packages
+./scripts/multi-repo-clone-all.sh
+
+# Clean up merged/stale branches across all repos
+./scripts/multi-repo-cleanup-branches.sh [--dry-run]
+
+# Example: Apply template changes to all repos
+./scripts/multi-repo-exec.sh single-repo-apply-tmpl.sh
 ```
 
 ## Module Development Workflow
@@ -113,10 +116,49 @@ k3modulename/
 ## Repository Management Tools
 
 ### Key Scripts
-- `build_list.py`: Generates repository lists and markdown tables using GitHub CLI
-- `build_readme.py`: Auto-generates the main README.md from module data
-- `run-script-in-repos.sh`: Executes scripts across all packages/k3* repos
-- `applytmpl.sh`: Copies template changes to current repository
+
+All workspace management scripts are located in `scripts/` directory:
+
+**Multi-Repo Operations:**
+- `multi-repo-exec.sh` - Executes a script across all packages/k3* repos
+- `multi-repo-clone-all.sh` - Clones all pykit3 packages from GitHub
+- `multi-repo-cleanup-branches.sh` - Removes merged/stale branches across repos
+
+**Workspace Builders:**
+- `workspace-build-repo-list.py` - Generates repository lists and markdown tables (uses gh CLI)
+- `workspace-build-readme.py` - Auto-generates main README.md from module data
+
+**Development Tools:**
+- `dev-create-package.sh` - Creates new k3* package from template
+- `dev-publish-to-pypi.sh` - Publishes package to PyPI (can be symlinked from sub-repos)
+- `dev-open-repo-urls.sh` - Opens PyPI or GitHub Actions URLs for all packages
+
+**Single-Repo Helpers** (used via multi-repo-exec):
+- `single-repo-add-gitignore.sh` - Appends entries to .gitignore
+- `single-repo-convert-remote.sh` - Converts git remote URLs
+- `single-repo-merge-pr.sh` - Merges a PR branch
+- `single-repo-pick-pr.sh` - Cherry-picks a PR branch
+
+## Script Organization
+
+All workspace management scripts follow a clear naming convention:
+
+- **`multi-repo-*`** - Scripts that operate on all k3* packages
+- **`single-repo-*`** - Scripts for individual repo operations (run via multi-repo-exec)
+- **`workspace-*`** - Scripts that manage pk3 workspace data/documentation
+- **`dev-*`** - Developer utilities for package/repo management
+
+Usage examples:
+```bash
+# Build workspace documentation
+make readme
+
+# Execute single-repo script across all packages
+./scripts/multi-repo-exec.sh single-repo-merge-pr.sh feature-branch
+
+# Create a new package
+./scripts/dev-create-package.sh packages k3newmodule
+```
 
 ### GitHub Integration
 - Uses `gh` CLI tool for repository management
