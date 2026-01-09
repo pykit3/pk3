@@ -27,6 +27,9 @@ jobs:
     - name: Install apt dependencies
       run: |
         if [ -f packages.txt ]; then cat packages.txt | xargs sudo apt-get install -y; fi
+    - name: Run CI setup script
+      run: |
+        if [ -f ci-setup.sh ]; then sudo bash ci-setup.sh; fi
     - name: Test with pytest
       env:
         TERM: xterm
