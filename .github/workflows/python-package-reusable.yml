@@ -2,6 +2,12 @@ name: Reusable Python Package CI
 
 on:
   workflow_call:
+    inputs:
+      privileged:
+        description: 'Run tests with sudo (for tests requiring root privileges)'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   ut:
@@ -33,7 +39,12 @@ jobs:
     - name: Test with pytest
       env:
         TERM: xterm
-      run: pytest -v
+      run: |
+        if [ "${{ inputs.privileged }}" = "true" ]; then
+          sudo env "PATH=$PATH" pytest -v
+        else
+          pytest -v
+        fi
     - uses: actions/upload-artifact@v4
       if: failure()
       with:
