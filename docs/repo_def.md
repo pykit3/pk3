@@ -9,6 +9,7 @@
 [k3down2]: https://github.com/pykit3/k3down2
 [k3etcd]: https://github.com/pykit3/k3etcd
 [k3fmt]: https://github.com/pykit3/k3fmt
+[k3fnmatch]: https://github.com/pykit3/k3fnmatch
 [k3fs]: https://github.com/pykit3/k3fs
 [k3git]: https://github.com/pykit3/k3git
 [k3handy]: https://github.com/pykit3/k3handy

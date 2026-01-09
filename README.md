@@ -1,107 +1,216 @@
-# pykit3
+**pykit3** is a collection of python3 modules that are loved by [s2][] developers.
 
-Collection of Python 3 utility modules.
-
-| Module | Description |
+| Name | Desc |
 | :-- | :-- |
-| [k3color][] | Terminal text coloring |
-| [k3confloader][] | Configuration loader |
-| [k3dict][] | Dictionary operations |
-| [k3down2][] | Markdown to media converter |
-| [k3fmt][] | String formatting utilities |
-| [k3fs][] | File system utilities |
-| [k3git][] | Git command wrapper |
-| [k3handy][] | Common function aliases |
-| [k3heap][] | Binary min heap |
-| [k3jobq][] | Concurrent job processor |
-| [k3log][] | Logging utilities |
-| [k3math][] | Math implementations |
-| [k3net][] | Network utilities |
-| [k3num][] | Human-readable numbers |
-| [k3pattern][] | Pattern matching |
-| [k3portlock][] | TCP port-based locks |
-| [k3priorityqueue][] | Priority queue |
-| [k3proc][] | Process utilities |
-| [k3rangeset][] | Range operations |
-| [k3shell][] | Shell command management |
-| [k3str][] | String utilities |
-| [k3thread][] | Thread utilities |
-| [k3time][] | Time conversion |
-| [k3txutil][] | Transaction helpers |
-| [k3ut][] | Unit test utilities |
+| [k3awssign][] | A python lib is used for adding aws version 4 signature to request. |
+| [k3cacheable][] | Cache data which access frequently. |
+| [k3cat][] | Just like nix command cat or tail, it continuously scan a file line by line. |
+| [k3cgrouparch][] | This lib is used to set up cgroup directory tree according to configuration saved in zookeeper, and add pid to cgroup accordingly. |
+| [k3color][] | create colored text on terminal |
+| [k3confloader][] | k3confloader loads conf for other pykit3 modules |
+| [k3daemonize][] | It supplies a command line interface API to start/stop/restart a daemon. |
+| [k3dict][] | It provides with several dict operation functions. |
+| [k3down2][] | convert markdown segment into easy to transfer media sucha images. |
+| [k3etcd][] | A python client for Etcd https://github.com/coreos/etcd This module will only work correctly with the etcd server version 2.3.x or later. |
+| [k3fmt][] | It provides with several string operation functions. |
+| [k3fnmatch][] | Enhanced fnmatch with grouping regex and path transformation |
+| [k3fs][] | File-system Utilities |
+| [k3git][] | wrapper of git command-line |
+| [k3handy][] | handy alias of mostly used functions |
+| [k3heap][] | k3heap is a binary min heap implemented with reference |
+| [k3http][] | We find that 'httplib' must work in blocking mode and it can not have a timeout when recving response. |
+| [k3httpmultipart][] | This module provides some util methods to get multipart headers and body. |
+| [k3jobq][] | k3jobq processes a series of inputs with functions concurrently |
+| [k3log][] | k3log is a collection of log utilities. |
+| [k3logcollector][] | Scan log files on local machine, collector all interested logs, and send to somewhere for display. |
+| [k3math][] | k3math is a toy math impl |
+| [k3mime][] | This module provide some util methods to handle mime type. |
+| [k3modutil][] | Submodule Utilities. |
+| [k3net][] | Utility functions for network related operation. |
+| [k3num][] | Convert number to human readable format in a string. |
+| [k3pattern][] | Find common prefix of several `string`s, tuples of string, or other nested structure, recursively by default. |
+| [k3portlock][] | k3protlock is a cross-process lock that is implemented with `tcp` port binding. |
+| [k3priorityqueue][] | priorityQueue is a queue with priority support |
+| [k3proc][] | easy to use `Popen` |
+| [k3rangeset][] | segmented range which is represented in a list of sorted interleaving range. |
+| [k3redisutil][] | For using redis more easily. |
+| [k3shell][] | A python module to manage commands. |
+| [k3stopwatch][] | StopWatch - library for adding timers and tags in your code for performance monitoring |
+| [k3str][] | k3str is a collection of string utilities. |
+| [k3thread][] | utility to create thread. |
+| [k3time][] | Time convertion utils |
+| [k3txutil][] | A collection of helper functions to implement transactional operations. |
+| [k3ut][] | unittest util |
+| [k3utdocker][] | unit test for python-docker |
+| [k3utfjson][] | force `json.dump` and `json.load` in `utf-8` encoding. |
+| [k3wsjobd][] | This module is a gevent based websocket server. When the server receives a job description from a client, it runs that job asynchronously in a thread, and reports the progress back to the client periodically. |
+| [k3zkutil][] | Some helper function to make life easier with zookeeper. |
 
-This repository manages the pykit3 module collection.
+
+`pk3` is the super repo for pykit3 sub module repos
+This is just a container and does nothing.
+
+# Usage
+
+```
+pip install xxx
+```
 
 
 # Development
 
-## Engineering Principles
+## Engineering practices
 
-- **Clarity first**: Write code for humans, prioritize readability
-- **Correctness over performance**: Focus on getting it right first  
-- **Simplicity**: Throw away what can't be done in a day, rewrite simpler tomorrow
-- **No smart code**: Write straightforward, maintainable code
-- **Comment WHY, not HOW**: Let code explain itself
+- Start with the correctness requirements, ignore the performance impact until
+  the end. You'll usually write something faster by focusing on keeping things
+  minimal anyway.
 
-## Workflow
+- Throw away what can't be done in a day of coding. when you rewrite it
+  tomorrow, it will be simpler.
 
-1. Fork repository
-2. Create feature branch  
-3. Implement changes
-4. Open pull request with rebase to main
+- Write code for human.
+
+    - Clarity comes first.
+    - Then the correctness.
+    - Then the performance(It is python, right?).
+
+    You are a smart guy. But your colleagues may not
+    be smart as you are.
+
+    **Do not write smart codes**.
+
+- Only write comment to explain **WHY**.
+  Improve the code to explain **HOW** and **WHAT**.
+
+## Developing workflow
+
+Follow the github flow:
+
+- Fork a repo
+- Hacking on it
+- Fire a pull request and then merge it to upstream.
+
+    - Rebase to upstream master before open a PR to reduce conflict.
+
+- Open an issue to describe what you gonna do before hacking on it:
+    Let everybody else know what you are doing.
 
 
 
 
-## Module Development
+## Make changes to a module
 
-### Setup
-- CI: GitHub Actions (`.github/workflows/python-package.yml`)
-- Testing: `pytest` framework
-- Documentation: Sphinx with [Google docstring style](https://www.sphinx-doc.org/en/1.5/ext/example_google.html)
-- Build docs: `make doc`
+- `github-action` is used for CI, such as  https://github.com/pykit3/k3proc/actions .
+    The CI action is defined in `.github/workflows/python-package.yml`.
+    Most of the time you do not need to modify this file unless **you know what
+    you are doing**.
 
-### Module Structure
-- `__init__.py` must define `__name__` and `__version__` ([semantic versioning](https://semver.org/))
-- GitHub metadata managed via `.github/settings.yml`
+- Testing is based on `pytest`: `pip install pytest` and `pytest`
 
-### Publishing
-1. Update `__version__` in `__init__.py`
-2. Commit and run `make build_setup_py`
-3. Push tag to trigger PyPI upload via GitHub Actions
+- Document is generated by `sphinx`.
+  Python docstring follows [google docstring style](https://www.sphinx-doc.org/en/1.5/ext/example_google.html).
+  Documenting building stuffs are all in `docs/` dir.
+
+  To build and test the doc: `make doc`.
+
+- Github meta data such as description and project labels are managed with
+  `.github/settings.yml`. see https://github.com/pykit3/gh-config for detail.
+
+- A module repo needs a `__name__ = "k3proc"` and `__version__ = "0.1.2"` in its
+  top level `__init__.py` so that building script generates the module name
+  automatically. A `__version__` must be in [semantic-version][] syntax.
+
+- Publish a module to `pip`:
+
+    - Update the version in `__init__.py`, e.g., to publish next version
+        `0.2.14` of `k3proc`, updata the `__version__` to `"0.2.14"`:
+
+        ```
+        # cat k3proc/__init__.py
+        ...
+        __version__ = "0.2.13"
+        __name__ = 'k3proc'
+        ...
+        ```
+    - Commit the version changes and `make release`.
+        This step creates a new tag of the current version.
+
+    - Pushing the created tag triggers an github action that
+        build a pip module and upload to `pypi.org`.
+
+    Then one can install the module(e.g. `k3proc`)
+    with `pip install k3proc` or with version specified:
+    `pip install k3proc==0.2.14`.
 
 
-## Directory Structure
+## Module dir layout
+
+Take `k3proc` as example:
 
 ```
-k3module/
-├── .github/workflows/    # CI/CD configurations
-├── _building/           # Build utilities  
-├── docs/               # Sphinx documentation
-├── test/               # Unit tests
-├── __init__.py        # Module metadata and exports
-├── main_module.py     # Primary implementation
-├── LICENSE
-├── Makefile          # Build commands
-├── README.md         # Auto-generated, do not edit
-├── requirements.txt  # Dependencies
-└── setup.py         # Auto-generated for releases
+# github.com/pykit3/k3proc/
+
+.github/workflows/python-package.yml
+.github/workflows/python-publish.yml
+.github/dependabot.yml
+.github/settings.yml
+_building/
+docs/
+test/
+__init__.py
+LICENSE
+Makefile
+proc.py*
+README.md
+requirements.txt
+setup.py
 ```
 
-Key files:
-- `docs/source/index.rst`: Update for new APIs
-- `README.md`: Generated via `make readme`
-- `setup.py`: Generated via `make build_setup_py`
+- `.github/workflows/python-package.yml`: github-action for CI.
+
+- `.github/workflows/python-publish.yml`: github-action for publishing a pip package.
+
+- `.github/dependabot.yml`: dependency check config.
+
+- `.github/settings.yml`: defines project desc, labels etc. Just modify it and push.
+
+- `_building/`: building utils for build pip package and docs etc.
+
+- `docs/source/conf.py`: universal doc generating config. DO NOT MODIFY.
+
+- `docs/source/index.rst`: defines what module/class/function to generate doc.
+    UPDATE this file for every modification to the codes.
+
+- `test/`: unit test files.
+
+- `test/data`: data file for test, if required.
+
+- `__init__.py`: defines meta info about a module. such as name, version and
+    module doc. Export APIs to end user.
+
+- `LICENSE`
+
+- `proc.py`: your actual works are here. choose whatever a name as you wish.
+    It should be directly imported by `__init__.py` to expose APIs to end user.
+
+- `README.md`: readme in pykit3 is generated. DO NOT MODIFY IT. `make readme`
+    re-generates README.md by extracting docs and examples from codes.
+    See: `_building/build_readme.py`.
+
+- `requirements.txt`: the dependency pip. Some packages that are depended by
+    all modules are defined in `_building/requirements.txt`.
+
+- `setup.py`: script to publish the module. You do not need to modify this file.
+    It is auto generated with `make release`.
 
 
-## Creating New Modules
+## Create a new module
 
-1. Fork from [tmpl][] (template repository)
-2. Choose name starting with `k3`
-3. Clone: `git clone git@github.com:pykit3/k3newmodule.git`
-4. Generate skeleton: `python ./_building/populate.py`
+- Fork from [tmpl][], which is a template module.
+    Choose a good name starts with `k3`, e.g. `k3whatever`.
 
-## Template Updates
+- Clone the repo to your laptop:
+  `git clone git@github.com:pykit3/k3whatever.git`.
 
 - Populate it: `python ./_building/populate.py`.
     This step generates a skeleton of a module:
@@ -122,42 +231,45 @@ Key files:
 
     Examine the generated files and add them and make your first commit!
 
-## Update tmpl changes
+## Document
 
-`applytmpl.sh` copies changes from repo `tmpl` to current dir.
-It should be run in a repo dir, e.g., `k3zkutil`:
-```
-./tmpl
-./k3zkutil
-```
+Write the `f**king` doc!
 
-To apply tmlp chagnes to every repo:
-```
-run-script-in-repos.sh repo-apply-tmpl.sh
-```
+- Document the module, classes and methods.
 
-## Documentation & Testing
+## Testing
 
-- Document all modules, classes, and methods
-- Write comprehensive tests
+Write the `f**king` test!
 
 
 [s2]: https://github.com/bsc-s2
 [semantic-version]: https://semver.org/
 [tmpl]: https://github.com/pykit3/tmpl
 
+[k3awssign]: https://github.com/pykit3/k3awssign
+[k3cacheable]: https://github.com/pykit3/k3cacheable
+[k3cat]: https://github.com/pykit3/k3cat
+[k3cgrouparch]: https://github.com/pykit3/k3cgrouparch
 [k3color]: https://github.com/pykit3/k3color
 [k3confloader]: https://github.com/pykit3/k3confloader
+[k3daemonize]: https://github.com/pykit3/k3daemonize
 [k3dict]: https://github.com/pykit3/k3dict
 [k3down2]: https://github.com/pykit3/k3down2
+[k3etcd]: https://github.com/pykit3/k3etcd
 [k3fmt]: https://github.com/pykit3/k3fmt
+[k3fnmatch]: https://github.com/pykit3/k3fnmatch
 [k3fs]: https://github.com/pykit3/k3fs
 [k3git]: https://github.com/pykit3/k3git
 [k3handy]: https://github.com/pykit3/k3handy
 [k3heap]: https://github.com/pykit3/k3heap
+[k3http]: https://github.com/pykit3/k3http
+[k3httpmultipart]: https://github.com/pykit3/k3httpmultipart
 [k3jobq]: https://github.com/pykit3/k3jobq
 [k3log]: https://github.com/pykit3/k3log
+[k3logcollector]: https://github.com/pykit3/k3logcollector
 [k3math]: https://github.com/pykit3/k3math
+[k3mime]: https://github.com/pykit3/k3mime
+[k3modutil]: https://github.com/pykit3/k3modutil
 [k3net]: https://github.com/pykit3/k3net
 [k3num]: https://github.com/pykit3/k3num
 [k3pattern]: https://github.com/pykit3/k3pattern
@@ -165,9 +277,15 @@ run-script-in-repos.sh repo-apply-tmpl.sh
 [k3priorityqueue]: https://github.com/pykit3/k3priorityqueue
 [k3proc]: https://github.com/pykit3/k3proc
 [k3rangeset]: https://github.com/pykit3/k3rangeset
+[k3redisutil]: https://github.com/pykit3/k3redisutil
 [k3shell]: https://github.com/pykit3/k3shell
+[k3stopwatch]: https://github.com/pykit3/k3stopwatch
 [k3str]: https://github.com/pykit3/k3str
 [k3thread]: https://github.com/pykit3/k3thread
 [k3time]: https://github.com/pykit3/k3time
 [k3txutil]: https://github.com/pykit3/k3txutil
 [k3ut]: https://github.com/pykit3/k3ut
+[k3utdocker]: https://github.com/pykit3/k3utdocker
+[k3utfjson]: https://github.com/pykit3/k3utfjson
+[k3wsjobd]: https://github.com/pykit3/k3wsjobd
+[k3zkutil]: https://github.com/pykit3/k3zkutil

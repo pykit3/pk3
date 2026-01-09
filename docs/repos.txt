@@ -9,6 +9,7 @@ k3dict
 k3down2
 k3etcd
 k3fmt
+k3fnmatch
 k3fs
 k3git
 k3handy

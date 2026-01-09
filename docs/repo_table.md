@@ -11,6 +11,7 @@
 | [k3down2][] | convert markdown segment into easy to transfer media sucha images. |
 | [k3etcd][] | A python client for Etcd https://github.com/coreos/etcd This module will only work correctly with the etcd server version 2.3.x or later. |
 | [k3fmt][] | It provides with several string operation functions. |
+| [k3fnmatch][] | Enhanced fnmatch with grouping regex and path transformation |
 | [k3fs][] | File-system Utilities |
 | [k3git][] | wrapper of git command-line |
 | [k3handy][] | handy alias of mostly used functions |
