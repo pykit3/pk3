@@ -7,8 +7,8 @@
 
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-TMPL_DIR="$SCRIPT_DIR/github.com/pykit3/tmpl"
+SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+TMPL_DIR="$SCRIPT_DIR/packages/tmpl"
 
 if [ $# -ne 2 ]; then
     echo "Usage: $0 <parent_dir> <package_name>"
