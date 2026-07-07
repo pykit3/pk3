@@ -17,6 +17,7 @@
 [k3http]: https://github.com/pykit3/k3http
 [k3httpmultipart]: https://github.com/pykit3/k3httpmultipart
 [k3jobq]: https://github.com/pykit3/k3jobq
+[k3kroki]: https://github.com/pykit3/k3kroki
 [k3log]: https://github.com/pykit3/k3log
 [k3logcollector]: https://github.com/pykit3/k3logcollector
 [k3math]: https://github.com/pykit3/k3math

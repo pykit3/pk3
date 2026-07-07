@@ -17,6 +17,7 @@ k3heap
 k3http
 k3httpmultipart
 k3jobq
+k3kroki
 k3log
 k3logcollector
 k3math
