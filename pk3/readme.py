@@ -220,12 +220,15 @@ def build_readme(
     # Load package
     package_name, pkg = _load_package(package_dir)
 
+    synopsis = _get_examples(pkg) + _read_synopsis_files(package_dir)
+
     # Build template variables
     j2vars = {
         "name": pyproject.get("project", {}).get("name", package_name),
         "description": _get_description(package_dir, pyproject),
         "package_doc": pkg.__doc__ or "",
-        "synopsis": _get_examples(pkg) + _read_synopsis_files(package_dir),
+        # `ruff format` removes blank lines at the edges of a code block.
+        "synopsis": synopsis.strip(),
     }
 
     # Load and render template
