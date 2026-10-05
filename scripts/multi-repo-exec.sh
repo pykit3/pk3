@@ -20,11 +20,12 @@ fi
 
 set -o errexit
 
-for d in packages/k3*/; do
+for d in $(cat docs/repos.txt); do
     name=$(basename "$d")
     echo "===($name)==="
     (
-        cd "$d"
+        cd "packages/$d"
         bash -x "../../scripts/$script" "$@"
     )
+    echo "===($name)=== Done"
 done

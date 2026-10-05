@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git status
+git log -n5 --color --graph --decorate -M --pretty=oneline --abbrev-commit -M
