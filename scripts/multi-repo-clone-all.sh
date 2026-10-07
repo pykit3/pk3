@@ -4,7 +4,7 @@
 
 set -e
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 if [ ! -f docs/repos.txt ]; then
     echo "docs/repos.txt not found. Run scripts/workspace-build-repo-list.py first."

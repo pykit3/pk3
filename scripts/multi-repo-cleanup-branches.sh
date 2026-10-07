@@ -9,7 +9,7 @@ set -e
 REPOS_DIR="packages"
 DRY_RUN="${1:-}"
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 if [ "$DRY_RUN" = "--dry-run" ]; then
     echo "=== DRY RUN MODE ==="
