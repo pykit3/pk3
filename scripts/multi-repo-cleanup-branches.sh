@@ -27,7 +27,7 @@ for repo in "$REPOS_DIR"/k3*; do
     default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "master")
 
     # Fetch and prune stale remote refs
-    git fetch --prune 2>/dev/null || true
+    [ "$DRY_RUN" = "--dry-run" ] || git fetch --prune 2>/dev/null || true
 
     # Remove local branches that are gone on remote
     gone_branches=$(git branch -vv 2>/dev/null | grep ': gone]' | awk '{print $1}' || true)
