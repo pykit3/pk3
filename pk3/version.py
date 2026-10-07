@@ -10,16 +10,16 @@ This allows shell scripts to obtain the package version without TOML parsing:
     VER=$(pk3 version)
     echo "Building version $VER"
 
-Uses tomllib (Python 3.11+) when available, falls back to regex parsing.
+Uses tomllib on Python 3.11+ and tomli on Python 3.10.
 """
 
-import re
+import sys
 from pathlib import Path
 
-try:
+if sys.version_info >= (3, 11):
     import tomllib
-except ImportError:
-    tomllib = None
+else:
+    import tomli as tomllib
 
 
 def get_version(path: str | Path = "pyproject.toml") -> str:
@@ -39,13 +39,9 @@ def get_version(path: str | Path = "pyproject.toml") -> str:
     path = Path(path)
     content = path.read_bytes()
 
-    if tomllib:
-        config = tomllib.loads(content.decode("utf-8"))
-        return config["project"]["version"]
+    config = tomllib.loads(content.decode("utf-8"))
+    version = config.get("project", {}).get("version")
+    if version is None:
+        raise ValueError(f"Could not find version in {path}")
 
-    # Fallback: regex for Python < 3.11
-    match = re.search(rb'version\s*=\s*"([^"]+)"', content)
-    if match:
-        return match.group(1).decode("utf-8")
-
-    raise ValueError(f"Could not find version in {path}")
+    return version

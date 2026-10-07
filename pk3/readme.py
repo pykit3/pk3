@@ -27,10 +27,10 @@ from pathlib import Path
 import jinja2
 import yaml
 
-try:
+if sys.version_info >= (3, 11):
     import tomllib
-except ImportError:
-    tomllib = None
+else:
+    import tomli as tomllib
 
 import re
 
@@ -79,29 +79,7 @@ def _read_toml(path: Path) -> dict:
     """Read TOML file and return parsed content."""
     content = path.read_bytes()
 
-    if tomllib:
-        return tomllib.loads(content.decode("utf-8"))
-
-    # Fallback for Python < 3.11: basic parsing
-    text = content.decode("utf-8")
-    result = {"project": {}}
-
-    # Extract name
-    match = re.search(r'name\s*=\s*"([^"]+)"', text)
-    if match:
-        result["project"]["name"] = match.group(1)
-
-    # Extract version
-    match = re.search(r'version\s*=\s*"([^"]+)"', text)
-    if match:
-        result["project"]["version"] = match.group(1)
-
-    # Extract description
-    match = re.search(r'description\s*=\s*"([^"]+)"', text)
-    if match:
-        result["project"]["description"] = match.group(1)
-
-    return result
+    return tomllib.loads(content.decode("utf-8"))
 
 
 def _load_package(package_dir: Path) -> tuple[str, object]:

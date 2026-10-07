@@ -39,6 +39,22 @@ dependencies = ["requests>=2.0"]
 
         self.assertEqual(result, "0.5.0")
 
+    def test_get_version_ignores_version_keys_of_other_tables(self):
+        content = b"""
+[tool.bumpversion]
+current_version = "0.0.1"
+
+[project]
+name = "test-package"
+version = "1.2.3"
+"""
+        with tempfile.NamedTemporaryFile(suffix=".toml", delete=False) as f:
+            f.write(content)
+            f.flush()
+            result = get_version(f.name)
+
+        self.assertEqual(result, "1.2.3")
+
     def test_get_version_file_not_found(self):
         with self.assertRaises(FileNotFoundError):
             get_version("/nonexistent/path/pyproject.toml")
@@ -51,7 +67,7 @@ name = "no-version-package"
         with tempfile.NamedTemporaryFile(suffix=".toml", delete=False) as f:
             f.write(content)
             f.flush()
-            with self.assertRaises((ValueError, KeyError)):
+            with self.assertRaises(ValueError):
                 get_version(f.name)
 
     def test_get_version_accepts_path_object(self):
