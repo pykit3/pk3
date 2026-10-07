@@ -65,7 +65,7 @@ jobs:
       run: |
         pip install -e .
         pip install mkdocs mkdocs-material "mkdocstrings[python]"
-        mkdocs build
+        mkdocs build --strict
 
   lint:
     runs-on: ubuntu-latest
