@@ -14,6 +14,7 @@ pykit3:
 - - f github.com/pykit3/k3down2
 - - f github.com/pykit3/k3etcd
 - - f github.com/pykit3/k3fmt
+- - f github.com/pykit3/k3fnmatch
 - - f github.com/pykit3/k3fs
 - - f github.com/pykit3/k3git
 - - f github.com/pykit3/k3handy
@@ -23,6 +24,7 @@ pykit3:
   - drdr github.com/drmingdrmer/k3heap
 - - f github.com/pykit3/k3httpmultipart
 - - f github.com/pykit3/k3jobq
+- - f github.com/pykit3/k3kroki
 - - f github.com/pykit3/k3log
 - - f github.com/pykit3/k3logcollector
 - - f github.com/pykit3/k3math
