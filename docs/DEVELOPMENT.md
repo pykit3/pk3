@@ -260,66 +260,17 @@ on:
   pull_request:
 
 jobs:
-  ut:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        python-version: ["3.10", 3.11, 3.12, 3.13]
-
-    steps:
-    - uses: actions/checkout@v5
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest
-        pip install -e .
-    - name: Test with pytest
-      run: |
-        pytest -v
-
-  build_doc:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        python-version: ["3.12"]
-
-    steps:
-    - uses: actions/checkout@v5
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Test building doc
-      run: |
-        pip install -e .
-        pip install mkdocs mkdocs-material "mkdocstrings[python]"
-        mkdocs build
-
-  lint:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        python-version: ["3.12"]
-
-    steps:
-    - uses: actions/checkout@v5
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Lint with ruff
-      run: |
-        pip install ruff
-        ruff check .
-        ruff format --check .
+  ci:
+    uses: pykit3/pk3/.github/workflows/python-package-reusable.yml@master
 ```
+
+`python-package-reusable.yml` in pk3 runs `pytest -v` on each Python version
+that the `Programming Language :: Python :: 3.X` classifiers in
+`pyproject.toml` list. It also runs `ruff check .`, `ruff format --check .` and
+`mkdocs build --strict`. Before the tests, it installs `package.json` with npm
+and `packages.txt` with apt-get, and runs `ci-setup.sh` with sudo, for each of
+these files that the package has. A package whose tests need root adds
+`with: privileged: true` to the `ci` job.
 
 ### .github/workflows/python-publish.yml
 
@@ -334,31 +285,14 @@ on:
       - v*
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install build twine
-
-      - name: Build package
-        run: python -m build
-
-      - name: Publish to PyPI
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-        run: twine upload dist/*
+  publish:
+    uses: pykit3/pk3/.github/workflows/python-publish-reusable.yml@master
+    secrets:
+      PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
 ```
+
+`python-publish-reusable.yml` in pk3 builds the package with `python -m build`
+and uploads it with `twine upload`.
 
 **Note**: The repository must have `PYPI_PASSWORD` secret configured with a PyPI API token.
 
