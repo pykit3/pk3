@@ -1,0 +1,84 @@
+name: Workspace test
+
+# Each package's own CI installs its k3 dependencies from PyPI. This
+# workflow tests every package against their masters instead, so a change
+# that breaks another package shows up before it is released.
+
+on:
+  push:
+    paths:
+      - .github/workflows/workspace-test.yml
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    outputs:
+      list: ${{ steps.read.outputs.list }}
+
+    steps:
+    - uses: actions/checkout@v5
+    - name: Read the package list
+      id: read
+      run: echo "list=$(jq -R -s -c 'split("\n") | map(select(length > 0))' docs/repos.txt)" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: packages
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.packages.outputs.list) }}
+
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        repository: pykit3/${{ matrix.package }}
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.13"
+    - name: Install dependencies, with the k3 packages from master
+      env:
+        PACKAGES: ${{ needs.packages.outputs.list }}
+        PACKAGE: ${{ matrix.package }}
+      run: |
+        python -m pip install --upgrade pip
+        # Constraints with git URLs make pip take every k3 package, transitive
+        # ones included, from master. A git URL install after a PyPI install
+        # would keep a release that has the same version as master.
+        # A constraint on the package under test would conflict with its
+        # editable install.
+        for p in $(echo "$PACKAGES" | jq -r '.[]'); do
+          if [ "$p" != "$PACKAGE" ]; then
+            echo "$p @ git+https://github.com/pykit3/$p@master"
+          fi
+        done > "$RUNNER_TEMP/k3-master.txt"
+        pip install -e ".[dev]" -c "$RUNNER_TEMP/k3-master.txt"
+    # The steps below repeat the package setup of the ut job in
+    # python-package-reusable.yml.
+    - name: Install npm dependencies
+      run: |
+        if [ -f package.json ]; then npm install; fi
+        echo "$GITHUB_WORKSPACE/node_modules/.bin/" >> $GITHUB_PATH
+    - name: Install apt dependencies
+      run: |
+        if [ -f packages.txt ]; then cat packages.txt | xargs sudo apt-get install -y; fi
+    - name: Run CI setup script
+      run: |
+        if [ -f ci-setup.sh ]; then sudo bash ci-setup.sh; fi
+    - name: Test with pytest
+      env:
+        TERM: xterm
+      run: |
+        # A package whose own CI passes `privileged: true` needs root.
+        if grep -q 'privileged: *true' .github/workflows/python-package.yml; then
+          sudo env "PATH=$PATH" pytest -v
+        else
+          pytest -v
+        fi
