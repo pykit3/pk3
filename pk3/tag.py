@@ -54,6 +54,7 @@ def create_tag(path: str | Path = "pyproject.toml", prefix: str = "v") -> str:
         cwd=Path(path).parent,
         encoding=_defenc,
         capture_output=True,
+        check=False,
     )
 
     if result.returncode != 0:

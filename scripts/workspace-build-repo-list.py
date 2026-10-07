@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-# coding: utf-8
 
 # require:
 #   gh: github cli: brew install gh
 
-import k3handy
 import json
+
+import k3handy
 
 
 def load_repos():

@@ -1,12 +1,9 @@
 """Tests for pk3.readme module."""
 
-import os
 import subprocess
-import sys
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
 
 from pk3.readme import build_readme
 
@@ -245,6 +242,7 @@ class TestReadmeCLI(unittest.TestCase):
             ["pk3", "readme", "--help"],
             capture_output=True,
             text=True,
+            check=False,
         )
         self.assertEqual(result.returncode, 0)
         self.assertIn("--dir", result.stdout)

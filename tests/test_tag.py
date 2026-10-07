@@ -25,6 +25,7 @@ def _clean_testdata():
         subprocess.run(
             ["git", f"--git-dir={tag_test_git}", "tag", "-d", tag],
             capture_output=True,
+            check=False,
         )
 
 
@@ -54,6 +55,7 @@ class TestCreateTag(unittest.TestCase):
             ["git", f"--git-dir={tag_test_git}", "tag", "-l"],
             capture_output=True,
             text=True,
+            check=False,
         )
         self.assertIn("v1.2.3", result.stdout)
 

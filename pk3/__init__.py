@@ -4,9 +4,9 @@ from importlib.metadata import version
 
 __version__ = version("pk3")
 
-from .version import get_version
-from .tag import create_tag
 from .publish import publish
 from .readme import build_readme
+from .tag import create_tag
+from .version import get_version
 
-__all__ = ["get_version", "create_tag", "publish", "build_readme", "__version__"]
+__all__ = ["__version__", "build_readme", "create_tag", "get_version", "publish"]

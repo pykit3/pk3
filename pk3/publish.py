@@ -53,6 +53,7 @@ def publish(test: bool = False) -> None:
         [sys.executable, "-m", "build"],
         capture_output=True,
         text=True,
+        check=False,
     )
     if result.returncode != 0:
         raise RuntimeError(f"Build failed:\n{result.stdout}\n{result.stderr}")
@@ -72,6 +73,7 @@ def publish(test: bool = False) -> None:
         env=env,
         capture_output=True,
         text=True,
+        check=False,
     )
     if result.returncode != 0:
         raise RuntimeError(f"Upload failed:\n{result.stdout}\n{result.stderr}")

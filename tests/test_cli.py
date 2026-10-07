@@ -24,6 +24,7 @@ def _clean_testdata():
         subprocess.run(
             ["git", f"--git-dir={tag_test_git}", "tag", "-d", tag],
             capture_output=True,
+            check=False,
         )
 
 
@@ -31,21 +32,25 @@ class TestCLIVersion(unittest.TestCase):
     def test_version_command(self):
         pyproject = this_base.parent / "pyproject.toml"
 
-        with patch.object(sys, "argv", ["pk3", "version", "--path", str(pyproject)]):
-            with patch("builtins.print") as mock_print:
-                main()
-                mock_print.assert_called()
-                # Version should be a valid semver string
-                args = mock_print.call_args[0][0]
-                self.assertRegex(args, r"^\d+\.\d+\.\d+")
+        with (
+            patch.object(sys, "argv", ["pk3", "version", "--path", str(pyproject)]),
+            patch("builtins.print") as mock_print,
+        ):
+            main()
+            mock_print.assert_called()
+            # Version should be a valid semver string
+            args = mock_print.call_args[0][0]
+            self.assertRegex(args, r"^\d+\.\d+\.\d+")
 
     def test_version_from_testdata(self):
         pyproject = tag_test_worktree / "pyproject.toml"
 
-        with patch.object(sys, "argv", ["pk3", "version", "--path", str(pyproject)]):
-            with patch("builtins.print") as mock_print:
-                main()
-                mock_print.assert_called_with("1.2.3")
+        with (
+            patch.object(sys, "argv", ["pk3", "version", "--path", str(pyproject)]),
+            patch("builtins.print") as mock_print,
+        ):
+            main()
+            mock_print.assert_called_with("1.2.3")
 
 
 class TestCLITag(unittest.TestCase):
@@ -62,11 +67,13 @@ class TestCLITag(unittest.TestCase):
 
         try:
             os.chdir(tag_test_worktree)
-            with patch.object(sys, "argv", ["pk3", "tag", "--path", str(pyproject)]):
-                with patch("builtins.print") as mock_print:
-                    main()
-                    calls = [str(c) for c in mock_print.call_args_list]
-                    self.assertTrue(any("v1.2.3" in c for c in calls))
+            with (
+                patch.object(sys, "argv", ["pk3", "tag", "--path", str(pyproject)]),
+                patch("builtins.print") as mock_print,
+            ):
+                main()
+                calls = [str(c) for c in mock_print.call_args_list]
+                self.assertTrue(any("v1.2.3" in c for c in calls))
         finally:
             os.chdir(original_cwd)
 
@@ -76,11 +83,13 @@ class TestCLITag(unittest.TestCase):
 
         try:
             os.chdir(tag_test_worktree)
-            with patch.object(sys, "argv", ["pk3", "tag", "--path", str(pyproject), "--prefix", "release-"]):
-                with patch("builtins.print") as mock_print:
-                    main()
-                    calls = [str(c) for c in mock_print.call_args_list]
-                    self.assertTrue(any("release-1.2.3" in c for c in calls))
+            with (
+                patch.object(sys, "argv", ["pk3", "tag", "--path", str(pyproject), "--prefix", "release-"]),
+                patch("builtins.print") as mock_print,
+            ):
+                main()
+                calls = [str(c) for c in mock_print.call_args_list]
+                self.assertTrue(any("release-1.2.3" in c for c in calls))
         finally:
             os.chdir(original_cwd)
 
@@ -94,6 +103,7 @@ class TestCLISubprocess(unittest.TestCase):
             ["pk3", "version", "--path", str(pyproject)],
             capture_output=True,
             text=True,
+            check=False,
         )
         self.assertEqual(result.returncode, 0)
         self.assertRegex(result.stdout.strip(), r"^\d+\.\d+\.\d+")
@@ -103,6 +113,7 @@ class TestCLISubprocess(unittest.TestCase):
             ["pk3", "--help"],
             capture_output=True,
             text=True,
+            check=False,
         )
         self.assertEqual(result.returncode, 0)
         self.assertIn("version", result.stdout)

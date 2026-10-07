@@ -34,7 +34,6 @@ except ImportError:
 
 import re
 
-
 DEFAULT_TEMPLATE = """\
 # {{ name }}
 

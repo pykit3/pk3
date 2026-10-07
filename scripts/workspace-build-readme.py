@@ -1,12 +1,7 @@
 #!/usr/bin/env python
-# coding: utf-8
 
-import doctest
-import os
-import sys
 
 import jinja2
-
 
 j2vars = {}
 
