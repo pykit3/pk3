@@ -46,7 +46,7 @@ class TestPublish(unittest.TestCase):
             try:
                 os.chdir(d)
                 env = {"TWINE_PASSWORD": "pypi-test"}
-                with patch.dict(os.environ, env), patch("pk3.publish.subprocess.run", side_effect=fake_run):
+                with patch.dict(os.environ, env), patch.object(subprocess, "run", side_effect=fake_run):
                     publish()
             finally:
                 os.chdir(original_cwd)
