@@ -78,7 +78,7 @@ if __name__ == "__main__":
     names = [x['name'] for x in repos]
 
     with open('docs/repos.txt', 'w') as f:
-        f.write('\n'.join(names))
+        f.write('\n'.join(names) + '\n')
 
     with open('docs/repo_def.md', 'w') as f:
         f.write(build_md_ref_list(repos))
