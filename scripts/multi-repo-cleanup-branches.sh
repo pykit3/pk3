@@ -45,7 +45,7 @@ for repo in "$REPOS_DIR"/k3*; do
     done
 
     # Remove remote branches merged to default branch (excluding HEAD and default)
-    merged_remote=$(git branch -r --merged "origin/$default_branch" 2>/dev/null | grep -v "HEAD" | grep -v "origin/$default_branch" | sed 's@origin/@@' | xargs || true)
+    merged_remote=$(git branch -r --merged "origin/$default_branch" --list 'origin/*' 2>/dev/null | grep -v "HEAD" | grep -v "origin/$default_branch" | sed 's@origin/@@' | xargs || true)
     for branch in $merged_remote; do
         echo "  remote (merged): $branch"
         [ "$DRY_RUN" = "--dry-run" ] || git push origin --delete "$branch" 2>/dev/null || true
