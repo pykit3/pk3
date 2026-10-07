@@ -218,7 +218,6 @@ pip install synopsispkg
 # Synopsis
 
 ```python
-
 # Additional synopsis content
 print('hello')
 ```
