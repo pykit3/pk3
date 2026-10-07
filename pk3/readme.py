@@ -19,8 +19,8 @@ Example:
     pk3 readme --dir ./k3color --output docs/README.md
 """
 
+import ast
 import doctest
-import importlib.util
 import sys
 from pathlib import Path
 
@@ -82,12 +82,12 @@ def _read_toml(path: Path) -> dict:
     return tomllib.loads(content.decode("utf-8"))
 
 
-def _load_package(package_dir: Path) -> tuple[str, object]:
+def _read_package(package_dir: Path) -> tuple[str, str]:
     """
-    Load package from directory.
+    Read the package name and docstring from `__init__.py` without importing it.
 
     Returns:
-        tuple: (package_name, package_module)
+        tuple: (package_name, package_doc)
     """
     init_file = package_dir / "__init__.py"
 
@@ -107,28 +107,14 @@ def _load_package(package_dir: Path) -> tuple[str, object]:
         # Fallback: use directory name
         package_name = package_dir.name
 
-    # Add parent to path for imports
-    parent = str(package_dir.parent)
-    if parent not in sys.path:
-        sys.path.insert(0, parent)
+    module = ast.parse(init_file.read_bytes())
+    package_doc = ast.get_docstring(module, clean=False) or ""
 
-    # Also add grandparent for indirect dependencies
-    grandparent = str(package_dir.parent.parent)
-    if grandparent not in sys.path:
-        sys.path.insert(0, grandparent)
-
-    # Load module
-    spec = importlib.util.spec_from_file_location(package_name, init_file)
-    pkg = importlib.util.module_from_spec(spec)
-    sys.modules[package_name] = pkg
-    spec.loader.exec_module(pkg)
-
-    return package_name, pkg
+    return package_name, package_doc
 
 
-def _get_examples(pkg) -> str:
+def _get_examples(doc: str) -> str:
     """Extract examples from package docstring using doctest parser."""
-    doc = pkg.__doc__ or ""
     parser = doctest.DocTestParser()
     examples = parser.get_examples(doc)
 
@@ -194,16 +180,16 @@ def build_readme(
 
     pyproject = _read_toml(pyproject_path)
 
-    # Load package
-    package_name, pkg = _load_package(package_dir)
+    # Read package
+    package_name, package_doc = _read_package(package_dir)
 
-    synopsis = _get_examples(pkg) + _read_synopsis_files(package_dir)
+    synopsis = _get_examples(package_doc) + _read_synopsis_files(package_dir)
 
     # Build template variables
     j2vars = {
         "name": pyproject.get("project", {}).get("name", package_name),
         "description": _get_description(package_dir, pyproject),
-        "package_doc": pkg.__doc__ or "",
+        "package_doc": package_doc,
         # `ruff format` removes blank lines at the edges of a code block.
         "synopsis": synopsis.strip(),
     }

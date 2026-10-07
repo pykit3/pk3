@@ -1,6 +1,7 @@
 """Tests for pk3.readme module."""
 
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -233,6 +234,70 @@ Copyright (c) 2015 Zhang Yanpo (张炎泼) <drdr.xp@gmail.com>
 [pykit3]: https://github.com/pykit3
 """
         self.assertEqual(content, expected.rstrip("\n"))
+
+    def test_build_readme_does_not_import_package(self):
+        """Test that README generation reads __init__.py without running it."""
+        pkg_dir = Path(self.tmpdir) / "noimportpkg"
+        pkg_dir.mkdir()
+
+        (pkg_dir / "pyproject.toml").write_text("""
+[project]
+name = "noimportpkg"
+version = "1.0.0"
+description = "No import package"
+""")
+
+        (pkg_dir / "__init__.py").write_text('''
+"""Package that must not be imported."""
+raise RuntimeError("imported")
+''')
+
+        sys_path = list(sys.path)
+        output = build_readme(pkg_dir)
+        content = Path(output).read_text()
+
+        expected = """\
+# noimportpkg
+
+[![Action-CI](https://github.com/pykit3/noimportpkg/actions/workflows/python-package.yml/badge.svg)](https://github.com/pykit3/noimportpkg/actions/workflows/python-package.yml)
+[![Documentation Status](https://readthedocs.org/projects/noimportpkg/badge/?version=stable)](https://noimportpkg.readthedocs.io/en/stable/?badge=stable)
+[![Package](https://img.shields.io/pypi/pyversions/noimportpkg)](https://pypi.org/project/noimportpkg)
+
+No import package
+
+noimportpkg is a component of [pykit3] project: a python3 toolkit set.
+
+Package that must not be imported.
+
+
+# Install
+
+```
+pip install noimportpkg
+```
+
+# Synopsis
+
+```python
+
+```
+
+#   Author
+
+Zhang Yanpo (张炎泼) <drdr.xp@gmail.com>
+
+#   Copyright and License
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Zhang Yanpo (张炎泼) <drdr.xp@gmail.com>
+
+
+[pykit3]: https://github.com/pykit3
+"""
+        self.assertEqual(content, expected.rstrip("\n"))
+        self.assertEqual(sys_path, sys.path)
+        self.assertNotIn("noimportpkg", sys.modules)
 
 
 class TestReadmeCLI(unittest.TestCase):
