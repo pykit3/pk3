@@ -129,6 +129,24 @@ class TestCreateTag(unittest.TestCase):
         )
         self.assertEqual("v1.2.3\n", result.stdout)
 
+    def test_create_tag_uncommitted_changes_fails(self):
+        # The version bump is not committed: HEAD does not hold the version to tag.
+        with tempfile.TemporaryDirectory() as repo:
+            pyproject = Path(repo) / "pyproject.toml"
+            pyproject.write_text('[project]\nversion = "1.0.0"\n')
+            identity = ["-c", "user.name=test", "-c", "user.email=test@example.com"]
+            subprocess.run(["git", "init", "-q", repo], check=True)
+            subprocess.run(["git", "-C", repo, "add", "pyproject.toml"], check=True)
+            subprocess.run(["git", "-C", repo, *identity, "commit", "-q", "-m", "init"], check=True)
+            pyproject.write_text('[project]\nversion = "1.0.1"\n')
+
+            with self.assertRaises(RuntimeError):
+                create_tag(pyproject)
+
+            tags = subprocess.run(["git", "-C", repo, "tag", "-l"], capture_output=True, text=True, check=False)
+
+        self.assertEqual("", tags.stdout)
+
     def test_create_tag_file_not_found(self):
         with self.assertRaises(FileNotFoundError):
             create_tag("/nonexistent/pyproject.toml")

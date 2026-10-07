@@ -44,10 +44,27 @@ def create_tag(path: str | Path = "pyproject.toml", prefix: str = "v") -> str:
     Raises:
         FileNotFoundError: If pyproject.toml doesn't exist.
         ValueError: If version cannot be found.
-        RuntimeError: If git tag creation fails.
+        RuntimeError: If tracked files have uncommitted changes, or git tag
+            creation fails.
     """
     ver = get_version(path)
     tag = f"{prefix}{ver}"
+
+    # A clean tree means HEAD holds the version being tagged.
+    # `--no-optional-locks` keeps this check from rewriting the index.
+    status = subprocess.run(
+        ["git", "--no-optional-locks", "status", "--porcelain", "--untracked-files=no"],
+        cwd=Path(path).parent,
+        encoding=_defenc,
+        capture_output=True,
+        check=False,
+    )
+
+    if status.returncode != 0:
+        raise RuntimeError(f"Failed to read git status: {status.stderr}")
+
+    if status.stdout:
+        raise RuntimeError(f"Refusing to create tag {tag}: uncommitted changes:\n{status.stdout}")
 
     result = subprocess.run(
         ["git", "tag", tag],
