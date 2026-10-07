@@ -9,11 +9,11 @@ from pk3.version import get_version
 
 class TestGetVersion(unittest.TestCase):
     def test_get_version_from_valid_pyproject(self):
-        content = b'''
+        content = b"""
 [project]
 name = "test-package"
 version = "1.2.3"
-'''
+"""
         with tempfile.NamedTemporaryFile(suffix=".toml", delete=False) as f:
             f.write(content)
             f.flush()
@@ -22,7 +22,7 @@ version = "1.2.3"
         self.assertEqual(result, "1.2.3")
 
     def test_get_version_with_complex_pyproject(self):
-        content = b'''
+        content = b"""
 [build-system]
 requires = ["setuptools>=61.0"]
 
@@ -31,7 +31,7 @@ name = "complex-package"
 version = "0.5.0"
 description = "A test package"
 dependencies = ["requests>=2.0"]
-'''
+"""
         with tempfile.NamedTemporaryFile(suffix=".toml", delete=False) as f:
             f.write(content)
             f.flush()
@@ -44,10 +44,10 @@ dependencies = ["requests>=2.0"]
             get_version("/nonexistent/path/pyproject.toml")
 
     def test_get_version_no_version_field(self):
-        content = b'''
+        content = b"""
 [project]
 name = "no-version-package"
-'''
+"""
         with tempfile.NamedTemporaryFile(suffix=".toml", delete=False) as f:
             f.write(content)
             f.flush()
@@ -55,10 +55,10 @@ name = "no-version-package"
                 get_version(f.name)
 
     def test_get_version_accepts_path_object(self):
-        content = b'''
+        content = b"""
 [project]
 version = "2.0.0"
-'''
+"""
         with tempfile.NamedTemporaryFile(suffix=".toml", delete=False) as f:
             f.write(content)
             f.flush()

@@ -35,10 +35,7 @@ def publish(test: bool = False) -> None:
     """
     password = os.environ.get("TWINE_PASSWORD")
     if not password:
-        raise RuntimeError(
-            "TWINE_PASSWORD not set\n"
-            "Usage: TWINE_PASSWORD=pypi-xxx pk3 publish [--test]"
-        )
+        raise RuntimeError("TWINE_PASSWORD not set\nUsage: TWINE_PASSWORD=pypi-xxx pk3 publish [--test]")
 
     # Clean previous builds
     for pattern in ["dist", "build", "*.egg-info"]:

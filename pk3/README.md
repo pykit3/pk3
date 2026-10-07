@@ -53,11 +53,11 @@ version = get_version()  # reads ./pyproject.toml
 version = get_version("/path/to/pyproject.toml")
 
 # Create git tag
-tag = create_tag()                    # creates "v0.1.1"
-tag = create_tag(prefix="release-")   # creates "release-0.1.1"
-tag = create_tag(prefix="")           # creates "0.1.1"
+tag = create_tag()  # creates "v0.1.1"
+tag = create_tag(prefix="release-")  # creates "release-0.1.1"
+tag = create_tag(prefix="")  # creates "0.1.1"
 
 # Publish to PyPI (requires TWINE_PASSWORD env var)
-publish()           # publish to PyPI
+publish()  # publish to PyPI
 publish(test=True)  # publish to TestPyPI
 ```

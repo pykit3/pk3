@@ -234,14 +234,10 @@ def build_readme(
     if template_path:
         template_path = Path(template_path)
         template_loader = jinja2.FileSystemLoader(searchpath=str(template_path.parent))
-        template_env = jinja2.Environment(
-            loader=template_loader, undefined=jinja2.StrictUndefined
-        )
+        template_env = jinja2.Environment(loader=template_loader, undefined=jinja2.StrictUndefined)
         template = template_env.get_template(template_path.name)
     else:
-        template = jinja2.Environment(
-            undefined=jinja2.StrictUndefined
-        ).from_string(DEFAULT_TEMPLATE)
+        template = jinja2.Environment(undefined=jinja2.StrictUndefined).from_string(DEFAULT_TEMPLATE)
 
     content = template.render(j2vars)
 

@@ -121,8 +121,7 @@ def command(
     cmd: str | Sequence[str],
     *arguments: str,
     timeout: float | None = None,
-) -> tuple[int, str, str]:
-    ...
+) -> tuple[int, str, str]: ...
 ```
 
 ### Docstrings

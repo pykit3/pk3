@@ -11,10 +11,10 @@ import k3handy
 def load_repos():
     # defined in ~/.config/gh/config.yml
 
-    j = k3handy.cmdout('gh', 'reposNameUrlDesc', 'pykit3')
-    j = ''.join(j)
+    j = k3handy.cmdout("gh", "reposNameUrlDesc", "pykit3")
+    j = "".join(j)
     repos = json.loads(j)
-    repos = repos['data']['repositoryOwner']['repositories']['nodes']
+    repos = repos["data"]["repositoryOwner"]["repositories"]["nodes"]
 
     return repos
 
@@ -25,13 +25,12 @@ def filter(repos):
     """
 
     not_need = [
-            'tmpl', # tempalte repo
-            'pk3', # this repo
-            'gh-config', # a config container for maintaining github configs.
+        "tmpl",  # tempalte repo
+        "pk3",  # this repo
+        "gh-config",  # a config container for maintaining github configs.
     ]
 
-    return [x for x in repos
-            if x['name'] not in not_need ]
+    return [x for x in repos if x["name"] not in not_need]
 
 
 def build_md_ref_list(repos):
@@ -45,9 +44,9 @@ def build_md_ref_list(repos):
     res = []
 
     for repo in repos:
-        res.append('[{name}]: {url}'.format(**repo))
+        res.append("[{name}]: {url}".format(**repo))
 
-    return '\n'.join(res)
+    return "\n".join(res)
 
 
 def build_md_table(repos):
@@ -61,27 +60,27 @@ def build_md_table(repos):
     """
 
     res = [
-            '| Name | Desc |', 
-            '| :-- | :-- |',
+        "| Name | Desc |",
+        "| :-- | :-- |",
     ]
 
-
     for repo in repos:
-        res.append('| [{name}][] | {description} |'.format(**repo))
+        res.append("| [{name}][] | {description} |".format(**repo))
 
-    return '\n'.join(res)
+    return "\n".join(res)
+
 
 if __name__ == "__main__":
     repos = load_repos()
-    repos.sort(key= lambda x: x['name'])
+    repos.sort(key=lambda x: x["name"])
     repos = filter(repos)
-    names = [x['name'] for x in repos]
+    names = [x["name"] for x in repos]
 
-    with open('docs/repos.txt', 'w') as f:
-        f.write('\n'.join(names) + '\n')
+    with open("docs/repos.txt", "w") as f:
+        f.write("\n".join(names) + "\n")
 
-    with open('docs/repo_def.md', 'w') as f:
+    with open("docs/repo_def.md", "w") as f:
         f.write(build_md_ref_list(repos))
 
-    with open('docs/repo_table.md', 'w') as f:
+    with open("docs/repo_table.md", "w") as f:
         f.write(build_md_table(repos))

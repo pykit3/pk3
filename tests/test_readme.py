@@ -18,12 +18,12 @@ class TestBuildReadme(unittest.TestCase):
         pkg_dir.mkdir()
 
         # Create pyproject.toml
-        (pkg_dir / "pyproject.toml").write_text('''
+        (pkg_dir / "pyproject.toml").write_text("""
 [project]
 name = "testpkg"
 version = "1.0.0"
 description = "A test package"
-''')
+""")
 
         # Create __init__.py with docstring
         (pkg_dir / "__init__.py").write_text('''
@@ -110,12 +110,12 @@ Copyright (c) 2015 Zhang Yanpo (张炎泼) <drdr.xp@gmail.com>
         pkg_dir = Path(self.tmpdir) / "custompkg"
         pkg_dir.mkdir()
 
-        (pkg_dir / "pyproject.toml").write_text('''
+        (pkg_dir / "pyproject.toml").write_text("""
 [project]
 name = "custompkg"
 version = "1.0.0"
 description = "Custom package"
-''')
+""")
 
         (pkg_dir / "__init__.py").write_text('''
 """Custom package docstring."""
@@ -175,12 +175,12 @@ Copyright (c) 2015 Zhang Yanpo (张炎泼) <drdr.xp@gmail.com>
         pkg_dir = Path(self.tmpdir) / "synopsispkg"
         pkg_dir.mkdir()
 
-        (pkg_dir / "pyproject.toml").write_text('''
+        (pkg_dir / "pyproject.toml").write_text("""
 [project]
 name = "synopsispkg"
 version = "1.0.0"
 description = "Synopsis package"
-''')
+""")
 
         (pkg_dir / "__init__.py").write_text('''
 """Package with synopsis file."""
