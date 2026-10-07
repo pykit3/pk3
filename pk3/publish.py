@@ -64,11 +64,11 @@ def publish(test: bool = False) -> None:
     cmd = [sys.executable, "-m", "twine", "upload"]
     if test:
         cmd.extend(["--repository", "testpypi"])
-    cmd.append("dist/*")
+    dists = sorted(Path("dist").glob("*"))
+    cmd.extend(str(p) for p in dists)
 
     result = subprocess.run(
-        " ".join(cmd),
-        shell=True,
+        cmd,
         env=env,
         capture_output=True,
         text=True,
