@@ -19,9 +19,9 @@ pykit3:
 - - f github.com/pykit3/k3git
 - - f github.com/pykit3/k3handy
 - - f github.com/pykit3/k3heap
-- - f github.com/pykit3/k3http
   - kanade github.com/IloveKanade/k3heap
   - drdr github.com/drmingdrmer/k3heap
+- - f github.com/pykit3/k3http
 - - f github.com/pykit3/k3httpmultipart
 - - f github.com/pykit3/k3jobq
 - - f github.com/pykit3/k3kroki
