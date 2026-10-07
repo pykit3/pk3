@@ -24,7 +24,8 @@ for repo in "$REPOS_DIR"/k3*; do
     cd "$repo"
 
     # Determine default branch
-    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "master")
+    default_branch=$(git ls-remote --symref origin HEAD | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2}')
+    [ -n "$default_branch" ] || { echo "  no default branch found on origin" >&2; exit 1; }
 
     # Fetch and prune stale remote refs
     [ "$DRY_RUN" = "--dry-run" ] || git fetch --prune 2>/dev/null || true
