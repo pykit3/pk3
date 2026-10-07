@@ -44,7 +44,7 @@ version = "0.1.0"
 description = "Short description of the package"
 readme = "README.md"
 license = {text = "MIT"}
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [
     { name = "Zhang Yanpo", email = "drdr.xp@gmail.com" }
 ]
@@ -55,10 +55,10 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
     # Runtime dependencies
@@ -265,7 +265,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python-version: [3.9, "3.10", 3.11, 3.12]
+        python-version: ["3.10", 3.11, 3.12, 3.13]
 
     steps:
     - uses: actions/checkout@v5
@@ -406,7 +406,7 @@ git push origin master
 ```
 
 This workflow ensures:
-- All tests pass on multiple Python versions (3.9-3.12)
+- All tests pass on multiple Python versions (3.10-3.13)
 - Linting and type checking pass
 - Documentation builds successfully
 - Changes are validated before reaching master
@@ -503,8 +503,8 @@ pk3 publish
 
 ### Python Support
 
-- Minimum Python version: 3.9
-- Test against: 3.9, 3.10, 3.11, 3.12
+- Minimum Python version: 3.10
+- Test against: 3.10, 3.11, 3.12, 3.13
 
 ### Code Style
 
