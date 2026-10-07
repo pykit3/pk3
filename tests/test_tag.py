@@ -2,6 +2,7 @@
 
 import os
 import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -92,6 +93,39 @@ class TestCreateTag(unittest.TestCase):
                 create_tag(pyproject)
         finally:
             os.chdir(original_cwd)
+
+    def test_create_tag_in_repo_of_path(self):
+        # Run from another repository: the tag must go to the one of pyproject.toml.
+        pyproject = tag_test_worktree / "pyproject.toml"
+        original_cwd = os.getcwd()
+
+        with tempfile.TemporaryDirectory() as other_repo:
+            subprocess.run(["git", "init", "-q", other_repo], check=True)
+            identity = ["-c", "user.name=test", "-c", "user.email=test@example.com"]
+            subprocess.run(
+                ["git", "-C", other_repo, *identity, "commit", "-q", "--allow-empty", "-m", "init"], check=True
+            )
+
+            try:
+                os.chdir(other_repo)
+                tag = create_tag(pyproject)
+            finally:
+                os.chdir(original_cwd)
+
+            other_tags = subprocess.run(
+                ["git", "-C", other_repo, "tag", "-l"], capture_output=True, text=True, check=False
+            )
+
+        self.assertEqual("v1.2.3", tag)
+        self.assertEqual("", other_tags.stdout)
+
+        result = subprocess.run(
+            ["git", f"--git-dir={tag_test_git}", "tag", "-l", "v1.2.3"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual("v1.2.3\n", result.stdout)
 
     def test_create_tag_file_not_found(self):
         with self.assertRaises(FileNotFoundError):

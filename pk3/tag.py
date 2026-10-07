@@ -34,7 +34,8 @@ def create_tag(path: str | Path = "pyproject.toml", prefix: str = "v") -> str:
     Create a git tag based on version from pyproject.toml.
 
     Args:
-        path: Path to pyproject.toml file.
+        path: Path to pyproject.toml file. The tag is created in the git
+            repository of its directory.
         prefix: Tag prefix, defaults to "v".
 
     Returns:
@@ -50,6 +51,7 @@ def create_tag(path: str | Path = "pyproject.toml", prefix: str = "v") -> str:
 
     result = subprocess.run(
         ["git", "tag", tag],
+        cwd=Path(path).parent,
         encoding=_defenc,
         capture_output=True,
     )
