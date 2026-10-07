@@ -4,17 +4,15 @@
 #   gh: github cli: brew install gh
 
 import json
+import os
 
 import k3handy
 
 
 def load_repos():
-    # defined in ~/.config/gh/config.yml
-
-    j = k3handy.cmdout("gh", "reposNameUrlDesc", "pykit3")
+    j = k3handy.cmdout("gh", "repo", "list", "pykit3", "--limit", "1000", "--json", "name,url,description")
     j = "".join(j)
     repos = json.loads(j)
-    repos = repos["data"]["repositoryOwner"]["repositories"]["nodes"]
 
     return repos
 
@@ -70,17 +68,32 @@ def build_md_table(repos):
     return "\n".join(res)
 
 
+def write_files(contents):
+    """
+    Write every `path: text` item of `contents`.
+
+    All texts go to temporary files first, so a failure leaves each file
+    either old or new, never truncated.
+    """
+
+    for path, text in contents.items():
+        with open(path + ".tmp", "w") as f:
+            f.write(text)
+
+    for path in contents:
+        os.replace(path + ".tmp", path)
+
+
 if __name__ == "__main__":
     repos = load_repos()
     repos.sort(key=lambda x: x["name"])
     repos = filter(repos)
     names = [x["name"] for x in repos]
 
-    with open("docs/repos.txt", "w") as f:
-        f.write("\n".join(names) + "\n")
-
-    with open("docs/repo_def.md", "w") as f:
-        f.write(build_md_ref_list(repos))
-
-    with open("docs/repo_table.md", "w") as f:
-        f.write(build_md_table(repos))
+    write_files(
+        {
+            "docs/repos.txt": "\n".join(names) + "\n",
+            "docs/repo_def.md": build_md_ref_list(repos),
+            "docs/repo_table.md": build_md_table(repos),
+        }
+    )
