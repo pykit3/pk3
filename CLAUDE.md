@@ -104,7 +104,7 @@ __all__ = ["Foo", "bar", "baz"]
 - **Testing**: `pytest` (tests use `unittest.TestCase` but are discovered/run by pytest)
 - **Linting**: `ruff` via `uvx` (line-length: 120)
 - **Documentation**: `mkdocs` with mkdocs-material theme
-- **Type checking**: `mypy` via `uvx`
+- **Type checking**: `mypy` via `uvx` (`make static_check`; CI does not run it)
 - **CI**: Reusable GitHub Actions workflows in `.github/workflows/` (matrix: Python 3.10–3.13)
 - **Publishing**: `twine` upload triggered by pushing version tags
 - **Workspace CLI**: `pk3` (installed from root pyproject.toml, provides `version|tag|publish|readme`)
@@ -113,7 +113,7 @@ __all__ = ["Foo", "bar", "baz"]
 ## Code Standards
 
 ### Type Annotations
-All code must use strong typing with Python 3.10+ syntax (`X | Y` not `Union[X, Y]`).
+New code must use strong typing with Python 3.10+ syntax (`X | Y` not `Union[X, Y]`).
 Use `from __future__ import annotations` for forward references.
 
 ```python

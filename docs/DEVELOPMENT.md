@@ -341,7 +341,7 @@ git push origin master
 
 This workflow ensures:
 - All tests pass on multiple Python versions (3.10-3.13)
-- Linting and type checking pass
+- Lint and format checks pass
 - Documentation builds successfully
 - Changes are validated before reaching master
 
