@@ -59,6 +59,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
     # Runtime dependencies
@@ -340,7 +341,7 @@ git push origin master
 ```
 
 This workflow ensures:
-- All tests pass on multiple Python versions (3.10-3.13)
+- All tests pass on multiple Python versions (3.10-3.14)
 - Lint and format checks pass
 - Documentation builds successfully
 - Changes are validated before reaching master
@@ -438,7 +439,7 @@ pk3 publish
 ### Python Support
 
 - Minimum Python version: 3.10
-- Test against: 3.10, 3.11, 3.12, 3.13
+- Test against: 3.10, 3.11, 3.12, 3.13, 3.14
 
 ### Code Style
 

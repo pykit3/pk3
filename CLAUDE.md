@@ -105,7 +105,7 @@ __all__ = ["Foo", "bar", "baz"]
 - **Linting**: `ruff` via `uvx` (line-length: 120)
 - **Documentation**: `mkdocs` with mkdocs-material theme
 - **Type checking**: `mypy` via `uvx` (`make static_check`; CI does not run it)
-- **CI**: Reusable GitHub Actions workflows in `.github/workflows/` (matrix: Python 3.10–3.13)
+- **CI**: Reusable GitHub Actions workflows in `.github/workflows/` (matrix: Python 3.10–3.14)
 - **Publishing**: `twine` upload triggered by pushing version tags
 - **Workspace CLI**: `pk3` (installed from root pyproject.toml, provides `version|tag|publish|readme`)
 - **GitHub CLI**: `gh` required for `workspace-build-repo-list.py`
