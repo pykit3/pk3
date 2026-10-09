@@ -78,7 +78,7 @@ k3modulename/
 ├── test/
 │   ├── test_modulename.py # Tests using unittest.TestCase, run via pytest
 │   └── test_doctest.py    # Doctest loader for module docstrings
-├── __init__.py            # Exports + version via importlib.metadata
+├── __init__.py            # Exports + __version__ via module __getattr__
 ├── modulename.py          # Implementation
 ├── pyproject.toml         # Package metadata, version (single source of truth)
 ├── Makefile               # Just: include _building/common.mk
@@ -87,16 +87,25 @@ k3modulename/
 
 ### Version Management
 - Version is defined in `pyproject.toml` (single source of truth)
-- `__init__.py` reads it at runtime: `__version__ = version("k3modulename")` via `importlib.metadata`
+- `__init__.py` looks it up with `importlib.metadata` in a module-level `__getattr__`, only when `__version__` is accessed, because importing `importlib.metadata` takes about 20 ms
 - `make release` → `pk3 tag` creates a git tag from the pyproject.toml version
 
 ### Module `__init__.py` Pattern
 ```python
 from .impl_module import Foo, bar, baz
-from importlib.metadata import version
 
-__version__ = version("k3modulename")
 __all__ = ["Foo", "bar", "baz"]
+
+
+def __getattr__(name: str) -> str:
+    # importlib.metadata takes about 20 ms to import, so it is loaded only
+    # when __version__ is read
+    if name != "__version__":
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+    from importlib.metadata import version
+
+    return version("k3modulename")
 ```
 
 ## Tooling

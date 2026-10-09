@@ -103,10 +103,6 @@ line-length = 120
 Short description of the package.
 """
 
-from importlib.metadata import version
-
-__version__ = version("k3example")
-
 from .example import (
     ExampleClass,
     example_function,
@@ -116,6 +112,17 @@ __all__ = [
     "ExampleClass",
     "example_function",
 ]
+
+
+def __getattr__(name: str) -> str:
+    # importlib.metadata takes about 20 ms to import, so it is loaded only
+    # when __version__ is read
+    if name != "__version__":
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+    from importlib.metadata import version
+
+    return version("k3example")
 ```
 
 ### Makefile
@@ -433,7 +440,7 @@ pk3 publish
 ### Version
 
 - Version is defined in `pyproject.toml` (single source of truth)
-- Read at runtime via `importlib.metadata.version()`
+- Looked up with `importlib.metadata.version()` in a module-level `__getattr__`, only when `__version__` is accessed
 - Use semantic versioning: `MAJOR.MINOR.PATCH`
 
 ### Python Support
