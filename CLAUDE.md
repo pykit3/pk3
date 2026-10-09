@@ -109,6 +109,7 @@ __all__ = ["Foo", "bar", "baz"]
 - **Publishing**: `twine` upload triggered by pushing version tags
 - **Workspace CLI**: `pk3` (installed from root pyproject.toml, provides `version|tag|publish|readme`)
 - **GitHub CLI**: `gh` required for `workspace-build-repo-list.py`
+- **Workspace venv**: holds editable installs of the k3 packages. Never `pip install` into it, because an install replaces one of them.
 
 ## Code Standards
 
@@ -126,6 +127,7 @@ def command(
 
 ### Docstrings
 Google docstring style. READMEs are auto-generated from docstrings — write good module and function docs, do not hand-edit README.md.
+After changing the `__init__.py` docstring or `synopsis.py`, run `make readme` and read the diff. If it deletes hand-written content, restore the old README and report it.
 
 ## Engineering Philosophy
 
